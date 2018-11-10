@@ -7,6 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import functions as FT
+
 
 class Ui_report_view(object):
     def setupUi(self, report_view):
@@ -85,8 +87,10 @@ class Ui_report_view(object):
         self.print_button.setText(_translate("report_view", "Print"))
         self.close_button.setText(_translate("report_view", "Close"))
 
+
 if __name__ == '__main__':
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     report_view = QtWidgets.QWidget()
     ui = Ui_report_view()
