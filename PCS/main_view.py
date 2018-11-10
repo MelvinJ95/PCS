@@ -171,6 +171,7 @@ class Ui_MainWindow(object):
         #BUTTON EVENTS
         self.check_out_button_2.clicked.connect(self.report)
 
+        #Give function an Instance of Main Window to have access to UI Elements 
         FT.function().returnObj(self)
 
 if __name__ == "__main__":
