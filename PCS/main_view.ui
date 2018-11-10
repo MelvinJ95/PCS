@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>643</width>
-    <height>445</height>
+    <height>0</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -166,6 +166,9 @@
      </property>
      <attribute name="verticalHeaderVisible">
       <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderDefaultSectionSize">
+      <number>30</number>
      </attribute>
      <row>
       <property name="text">
