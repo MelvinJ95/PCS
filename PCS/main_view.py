@@ -20,7 +20,7 @@ class Ui_MainWindow(object):
         FT.function().addtoCart(self, item_to_send)
 
     def report(self):
-       FT.function().report()
+        FT.function().report()
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
