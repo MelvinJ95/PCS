@@ -1,0 +1,41 @@
+---programmer----
+setshopName(string name) //sets the name of the shop shop_name_label
+setElementsGridDimensions(int x, int y) //set dimension of elements_grid
+setCartRowsSize(int x) //change cart_table , using verticalHeaderDefaultSelection
+clearHeader() // header_text clear
+appendtoHeader() //header_text append, then set centered
+clearBody() // header_text clear
+appendtoBody() //header_text append, then set centered
+clearFooter() // header_text clear
+appendtoFooter() //header_text append, then set centered
+setCartQuantityEnable(boolean) //sets if the quantity will be showed or not, affects how it is shown in the receipt, cart_table
+setPrintFormat(int) //there will be 2 possible, jpeg or PDF, pending to be implemented. 
+
+--- affect reports view ---
+reportItemTypeEnable(boolean) // decides if it will give the user the option to select item type. affects : item_type_label, item_type_combo_box
+reportItemEnable(boolean) // decides if it will give the user the option to select item type. affects : item_label, item__combo_box
+
+
+elementGridAdd(object (icon, name, type, price)) // affects elements_grid, adds elements to the grid. programmer must add this elements before deployment 
+elementGridSetEventOptions(string, boolean) // for string "doubleClick" , boolean 1, set quantity prompt on double click, boolean 0, disable it
+
+---embedded functions ----
+addtoCart(object element) //adds elements to cart
+sumTotal() //to be called every time something is added or deleted from the list
+deleteItem(row) //take the row int and delete it from the list, move everything up the list. 
+checkout() // take the cart list, added it to the body of the receipt, print to PDF for now
+reportView() //open report view
+createReport() //take string set on date_start_selector and date_end_selector, also take item type and item. specific query is pending database implementation.
+poblateReport(list) //the list will com from the query. it will add all  
+printReport() // print 16 items from the list, print the total
+closeReportView() // close report view, and then get back to main window. 
+
+----events--------
+double click element in cart: deleteItem(row)
+click element in grid: addtoCart(element)
+double click element in grid : prompt for quantity //depends on setting set by programmer. 
+click check out button: save receipt pdf and open, clear cart and total
+click report button: reportView()
+click create report: createReport(), open report_view, close report_create_view
+click print in report_view : save first 16 rows on list, then the total, print to pdf
+click close in report_view : close report_view, set to from, main view
