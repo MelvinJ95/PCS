@@ -2,6 +2,7 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
+    BOOLEAN
     COLUMN
     EQUALS
     LPAREN
@@ -22,21 +23,22 @@ Rule 9     expression -> TABLE_C column
 Rule 10    expression -> TABLE_R column
 Rule 11    column -> STRING
 Rule 12    column -> STRING COMMA column
-Rule 13    boolean -> FALSE
-Rule 14    boolean -> TRUE
-Rule 15    expression -> report_item_type_enable boolean
-Rule 16    expression -> report_item_enable boolean
+Rule 13    expression -> item_type_enable boolean
+Rule 14    expression -> item_enable boolean
+Rule 15    boolean -> FALSE
+Rule 16    boolean -> TRUE
 Rule 17    expression -> EXIT
 Rule 18    empty -> <empty>
 
 Terminals, with rules where they appear
 
+BOOLEAN              : 
 COLUMN               : 
 COMMA                : 12
 DIVIDE               : 4
 EQUALS               : 
 EXIT                 : 17
-FALSE                : 13
+FALSE                : 15
 FLOAT                : 8
 LPAREN               : 
 MINUS                : 6
@@ -47,14 +49,14 @@ RPAREN               :
 STRING               : 11 12
 TABLE_C              : 9
 TABLE_R              : 10
-TRUE                 : 14
+TRUE                 : 16
 error                : 
-report_item_enable   : 16
-report_item_type_enable : 15
+item_enable          : 14
+item_type_enable     : 13
 
 Nonterminals, with rules where they appear
 
-boolean              : 15 16
+boolean              : 13 14
 calc                 : 0
 column               : 9 10 12
 empty                : 2
@@ -75,8 +77,8 @@ state 0
     (8) expression -> . FLOAT
     (9) expression -> . TABLE_C column
     (10) expression -> . TABLE_R column
-    (15) expression -> . report_item_type_enable boolean
-    (16) expression -> . report_item_enable boolean
+    (13) expression -> . item_type_enable boolean
+    (14) expression -> . item_enable boolean
     (17) expression -> . EXIT
     (18) empty -> .
 
@@ -84,8 +86,8 @@ state 0
     FLOAT           shift and go to state 5
     TABLE_C         shift and go to state 6
     TABLE_R         shift and go to state 7
-    report_item_type_enable shift and go to state 8
-    report_item_enable shift and go to state 9
+    item_type_enable shift and go to state 8
+    item_enable     shift and go to state 9
     EXIT            shift and go to state 10
     $end            reduce using rule 18 (empty -> .)
 
@@ -165,9 +167,9 @@ state 7
 
 state 8
 
-    (15) expression -> report_item_type_enable . boolean
-    (13) boolean -> . FALSE
-    (14) boolean -> . TRUE
+    (13) expression -> item_type_enable . boolean
+    (15) boolean -> . FALSE
+    (16) boolean -> . TRUE
 
     FALSE           shift and go to state 19
     TRUE            shift and go to state 20
@@ -176,9 +178,9 @@ state 8
 
 state 9
 
-    (16) expression -> report_item_enable . boolean
-    (13) boolean -> . FALSE
-    (14) boolean -> . TRUE
+    (14) expression -> item_enable . boolean
+    (15) boolean -> . FALSE
+    (16) boolean -> . TRUE
 
     FALSE           shift and go to state 19
     TRUE            shift and go to state 20
@@ -207,16 +209,16 @@ state 11
     (8) expression -> . FLOAT
     (9) expression -> . TABLE_C column
     (10) expression -> . TABLE_R column
-    (15) expression -> . report_item_type_enable boolean
-    (16) expression -> . report_item_enable boolean
+    (13) expression -> . item_type_enable boolean
+    (14) expression -> . item_enable boolean
     (17) expression -> . EXIT
 
     NUMBER          shift and go to state 4
     FLOAT           shift and go to state 5
     TABLE_C         shift and go to state 6
     TABLE_R         shift and go to state 7
-    report_item_type_enable shift and go to state 8
-    report_item_enable shift and go to state 9
+    item_type_enable shift and go to state 8
+    item_enable     shift and go to state 9
     EXIT            shift and go to state 10
 
     expression                     shift and go to state 22
@@ -232,16 +234,16 @@ state 12
     (8) expression -> . FLOAT
     (9) expression -> . TABLE_C column
     (10) expression -> . TABLE_R column
-    (15) expression -> . report_item_type_enable boolean
-    (16) expression -> . report_item_enable boolean
+    (13) expression -> . item_type_enable boolean
+    (14) expression -> . item_enable boolean
     (17) expression -> . EXIT
 
     NUMBER          shift and go to state 4
     FLOAT           shift and go to state 5
     TABLE_C         shift and go to state 6
     TABLE_R         shift and go to state 7
-    report_item_type_enable shift and go to state 8
-    report_item_enable shift and go to state 9
+    item_type_enable shift and go to state 8
+    item_enable     shift and go to state 9
     EXIT            shift and go to state 10
 
     expression                     shift and go to state 23
@@ -257,16 +259,16 @@ state 13
     (8) expression -> . FLOAT
     (9) expression -> . TABLE_C column
     (10) expression -> . TABLE_R column
-    (15) expression -> . report_item_type_enable boolean
-    (16) expression -> . report_item_enable boolean
+    (13) expression -> . item_type_enable boolean
+    (14) expression -> . item_enable boolean
     (17) expression -> . EXIT
 
     NUMBER          shift and go to state 4
     FLOAT           shift and go to state 5
     TABLE_C         shift and go to state 6
     TABLE_R         shift and go to state 7
-    report_item_type_enable shift and go to state 8
-    report_item_enable shift and go to state 9
+    item_type_enable shift and go to state 8
+    item_enable     shift and go to state 9
     EXIT            shift and go to state 10
 
     expression                     shift and go to state 24
@@ -282,16 +284,16 @@ state 14
     (8) expression -> . FLOAT
     (9) expression -> . TABLE_C column
     (10) expression -> . TABLE_R column
-    (15) expression -> . report_item_type_enable boolean
-    (16) expression -> . report_item_enable boolean
+    (13) expression -> . item_type_enable boolean
+    (14) expression -> . item_enable boolean
     (17) expression -> . EXIT
 
     NUMBER          shift and go to state 4
     FLOAT           shift and go to state 5
     TABLE_C         shift and go to state 6
     TABLE_R         shift and go to state 7
-    report_item_type_enable shift and go to state 8
-    report_item_enable shift and go to state 9
+    item_type_enable shift and go to state 8
+    item_enable     shift and go to state 9
     EXIT            shift and go to state 10
 
     expression                     shift and go to state 25
@@ -333,46 +335,46 @@ state 17
 
 state 18
 
-    (15) expression -> report_item_type_enable boolean .
+    (13) expression -> item_type_enable boolean .
 
-    MULTIPLY        reduce using rule 15 (expression -> report_item_type_enable boolean .)
-    DIVIDE          reduce using rule 15 (expression -> report_item_type_enable boolean .)
-    PLUS            reduce using rule 15 (expression -> report_item_type_enable boolean .)
-    MINUS           reduce using rule 15 (expression -> report_item_type_enable boolean .)
-    $end            reduce using rule 15 (expression -> report_item_type_enable boolean .)
+    MULTIPLY        reduce using rule 13 (expression -> item_type_enable boolean .)
+    DIVIDE          reduce using rule 13 (expression -> item_type_enable boolean .)
+    PLUS            reduce using rule 13 (expression -> item_type_enable boolean .)
+    MINUS           reduce using rule 13 (expression -> item_type_enable boolean .)
+    $end            reduce using rule 13 (expression -> item_type_enable boolean .)
 
 
 state 19
 
-    (13) boolean -> FALSE .
+    (15) boolean -> FALSE .
 
-    MULTIPLY        reduce using rule 13 (boolean -> FALSE .)
-    DIVIDE          reduce using rule 13 (boolean -> FALSE .)
-    PLUS            reduce using rule 13 (boolean -> FALSE .)
-    MINUS           reduce using rule 13 (boolean -> FALSE .)
-    $end            reduce using rule 13 (boolean -> FALSE .)
+    MULTIPLY        reduce using rule 15 (boolean -> FALSE .)
+    DIVIDE          reduce using rule 15 (boolean -> FALSE .)
+    PLUS            reduce using rule 15 (boolean -> FALSE .)
+    MINUS           reduce using rule 15 (boolean -> FALSE .)
+    $end            reduce using rule 15 (boolean -> FALSE .)
 
 
 state 20
 
-    (14) boolean -> TRUE .
+    (16) boolean -> TRUE .
 
-    MULTIPLY        reduce using rule 14 (boolean -> TRUE .)
-    DIVIDE          reduce using rule 14 (boolean -> TRUE .)
-    PLUS            reduce using rule 14 (boolean -> TRUE .)
-    MINUS           reduce using rule 14 (boolean -> TRUE .)
-    $end            reduce using rule 14 (boolean -> TRUE .)
+    MULTIPLY        reduce using rule 16 (boolean -> TRUE .)
+    DIVIDE          reduce using rule 16 (boolean -> TRUE .)
+    PLUS            reduce using rule 16 (boolean -> TRUE .)
+    MINUS           reduce using rule 16 (boolean -> TRUE .)
+    $end            reduce using rule 16 (boolean -> TRUE .)
 
 
 state 21
 
-    (16) expression -> report_item_enable boolean .
+    (14) expression -> item_enable boolean .
 
-    MULTIPLY        reduce using rule 16 (expression -> report_item_enable boolean .)
-    DIVIDE          reduce using rule 16 (expression -> report_item_enable boolean .)
-    PLUS            reduce using rule 16 (expression -> report_item_enable boolean .)
-    MINUS           reduce using rule 16 (expression -> report_item_enable boolean .)
-    $end            reduce using rule 16 (expression -> report_item_enable boolean .)
+    MULTIPLY        reduce using rule 14 (expression -> item_enable boolean .)
+    DIVIDE          reduce using rule 14 (expression -> item_enable boolean .)
+    PLUS            reduce using rule 14 (expression -> item_enable boolean .)
+    MINUS           reduce using rule 14 (expression -> item_enable boolean .)
+    $end            reduce using rule 14 (expression -> item_enable boolean .)
 
 
 state 22

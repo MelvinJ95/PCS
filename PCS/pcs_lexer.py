@@ -3,11 +3,14 @@ import ply.yacc as yacc
 
 # -- Lexer --
 
-reserved_keywords = ()  # function names and types shall be defined here
+# reserved = {
+#     'true' : 'TRUE',
+#     'false' : 'FALSE',
+#     'item_type_enable' : "ITEM_TYPE_ENABLE",
+#     'item_enable' : "ITEM_TYPE"
+# }  # function names and types shall be defined here
 
-tokens = (
-    'TRUE',
-    'FALSE',
+tokens = [
     'NUMBER',
     'FLOAT',
     'PLUS',
@@ -22,10 +25,13 @@ tokens = (
     'TABLE_R',
     'COLUMN',
     'COMMA',
-    'report_item_type_enable',
-    'report_item_enable',
+    'BOOLEAN',
+    'TRUE',
+    'FALSE',
+    'item_type_enable',
+    'item_enable',
     'EXIT'
-)  # + list(reserved_keywords.values())
+  ]  #+ list(reserved.values())
 
 # Regular expression rules for simple tokens
 t_PLUS = r'\+'
@@ -61,21 +67,21 @@ def t_TABLE_R(t):
     r'addRow'
     return t
 
-def t_true(t):
-    r't'
-    t.value = 1
+def t_TRUE(t):
+    r'(true)'
+    t.value = True
     return t
 
-def t_false(t):
-    r'f'
-    t.value = str(t.value)
-    return False
+def t_FALSE(t):
+    r'(false)'
+    t.value = False
+    return t
 
-def t_report_item_type_enable(t):
+def t_item_type_enable(t):
     r'item_type_enable'
     return t
 
-def t_report_item_enable(t):
+def t_item_enable(t):
     r'item_enable'
     return t
 
@@ -180,21 +186,30 @@ def p_Column(p):
     p[0] = (tuple(tempList))
 
 #report create view functions
+
+# def p_use_boolean(p):
+#     '''
+#     expression : boolean
+#     '''
+#     p[0] = p[1]
+
+#reportCV_expression
+def p_report_create_view(p):
+    '''
+    expression : item_type_enable boolean 
+                | item_enable boolean
+    '''
+    print((p[1], p[2]))
+    p[0] = (p[1], p[2])
+    # print(p[1])
+    # p[0] = p[1]
+
 def p_boolean(p):
     '''
     boolean : FALSE
             | TRUE
     '''
     p[0] = p[1]
-
-#reportCV_expression
-def p_report_create_view(p):
-    '''
-    expression : report_item_type_enable boolean
-                        | report_item_enable boolean 
-    '''
-    print((p[1], p[2]))
-    #p[0] = (p[1], p[2])
 
 def p_exit(p):
     '''
