@@ -3,9 +3,14 @@ import ply.yacc as yacc
 
 # -- Lexer --
 
-reserved_keywords = ()  # function names and types shall be defined here
+# reserved = {
+#     'true' : 'TRUE',
+#     'false' : 'FALSE',
+#     'item_type_enable' : "ITEM_TYPE_ENABLE",
+#     'item_enable' : "ITEM_TYPE"
+# }  # function names and types shall be defined here
 
-tokens = (
+tokens = [
     'NUMBER',
     'FLOAT',
     'TRUE',
@@ -31,8 +36,10 @@ tokens = (
     'APPEND',
     'CLEAR',
     'TO',
+    'item_type_enable',
+    'item_enable',
     'EXIT'
-)  # + list(reserved_keywords.values())
+  ]  #+ list(reserved.values())
 
 # Regular expression rules for simple tokens
 t_PLUS = r'\+'
@@ -57,6 +64,7 @@ def t_FLOAT(t):
     r'\d+\.\d'
     t.value = float(t.value)
     return t
+
 
 def t_TRUE(t):
     r'(true)'
@@ -117,6 +125,14 @@ def t_TO(t):
     r'to'
     return t
 
+
+def t_item_type_enable(t):
+    r'report\ item_type_enable'
+    return t
+
+def t_item_enable(t):
+    r'report\ item_enable'
+    return t
 
 def t_EXIT(t):
     r'exit'
@@ -267,6 +283,25 @@ def p_Column(p):
             tempList.append(thing)
     #print(tuple(tempList))
     p[0] = (tuple(tempList))
+
+#report create view functions
+
+# def p_use_boolean(p):
+#     '''
+#     expression : boolean
+#     '''
+#     p[0] = p[1]
+
+#reportCV_expression
+def p_report_create_view(p):
+    '''
+    expression : item_type_enable boolean 
+                | item_enable boolean
+    '''
+    print((p[1], p[2]))
+    p[0] = (p[1], p[2])
+    # print(p[1])
+    # p[0] = p[1]
 
 
 def p_exit(p):
