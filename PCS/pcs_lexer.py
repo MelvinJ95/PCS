@@ -36,10 +36,18 @@ tokens = [
     'APPEND',
     'CLEAR',
     'TO',
+    'VIEW',
+    'SET_SHOP_NAME',
+    'SET_DIMENSION',
+    'SET_CART_ROW_SIZE',
+    'SET_CART_QUANTITY_ENABLE',
+    'ELEMENT_GRID_ADD',
     'item_type_enable',
     'item_enable',
     'EXIT'
   ]  #+ list(reserved.values())
+
+
 
 # Regular expression rules for simple tokens
 t_PLUS = r'\+'
@@ -85,6 +93,37 @@ def t_TABLE_C(t):
 
 def t_TABLE_R(t):
     r'addRow'
+    return t
+
+
+# Main View Functions
+def t_VIEW(t):
+    r'view'
+    return t
+
+
+def t_SET_SHOP_NAME(t):
+    r'set_shop_name'
+    return t
+
+
+def t_SET_DIMENSION(t):
+    r'set_dimension'
+    return t
+
+
+def t_SET_CART_ROW_SIZE(t):
+    r'set_cart_row_size'
+    return t
+
+
+def t_SET_CART_QUANTITY_ENABLE(t):
+    r'set_cart_quantity_enable'
+    return t
+
+
+def t_ELEMENT_GRID_ADD(t):
+    r'element_grid_add'
     return t
 
 
@@ -191,7 +230,7 @@ def p_calc(p):
          | tableExp
          | pathexpr
          | receiptexpr
-         | boolean
+         | mainviewexp
          | empty
     '''
     print(run(p[1]))
@@ -253,6 +292,30 @@ def p_receiptexpr_append(p):
     '''
     print((p[1],p[2],p[3],p[4],p[5]))
     p[0] = (p[1],p[2],p[3],p[4],p[5])
+
+# Main View
+def p_mainviewexp(p) :
+    '''
+    mainviewexp : VIEW SET_SHOP_NAME STRING
+                | VIEW SET_DIMENSION NUMBER COMMA NUMBER
+                | VIEW SET_CART_ROW_SIZE NUMBER
+                | VIEW SET_CART_QUANTITY_ENABLE boolean
+                | VIEW ELEMENT_GRID_ADD path_series
+    '''
+    print((p[1], p[2], p[3]))
+    p[0] = (p[1],p[2],p[3])
+
+def p_path_series(p):
+    '''
+    path_series : PATHNAME
+                | PATHNAME COMMA PATHNAME
+    '''
+    tempList = []
+    for thing in p:
+        if thing != None:
+            tempList.append(thing)
+    #print(tuple(tempList))
+    p[0] = (tuple(tempList))
 
 # Table Parsing
 def p_createTable(p):
