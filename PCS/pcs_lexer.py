@@ -354,7 +354,3 @@ while True:
     except EOFError:  # ctr + D
         break
     parser.parse(s)
-
-
-# cashaer shopName 1000x1000
-# itemArea
