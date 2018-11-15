@@ -48,7 +48,6 @@ tokens = [
   ]  #+ list(reserved.values())
 
 
-
 # Regular expression rules for simple tokens
 t_PLUS = r'\+'
 t_MINUS = r'-'
@@ -307,8 +306,8 @@ def p_mainviewexp(p) :
 
 def p_path_series(p):
     '''
-    path_series : PATHNAME
-                | PATHNAME COMMA PATHNAME
+    path_series : STRING
+                | STRING DIVIDE STRING
     '''
     tempList = []
     for thing in p:
