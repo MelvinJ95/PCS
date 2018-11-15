@@ -52,7 +52,6 @@ t_EQUALS = r'\='
 t_COMMA = r'\,'
 t_PERIOD = r'\.'
 
-
 # A regular expression rule with some action code
 def t_NUMBER(t):
     r'\d+'
