@@ -15,7 +15,12 @@ tokens = (
     'LPAREN',
     'RPAREN',
     'EQUALS',
-    'STRING'
+    'STRING',
+    'TABLE_C',
+    'TABLE_R',
+    'COLUMN',
+    'COMMA',
+    'EXIT'
 )  # + list(reserved_keywords.values())
 
 # Regular expression rules for simple tokens
@@ -26,6 +31,7 @@ t_DIVIDE = r'/'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_EQUALS = r'\='
+t_COMMA = r'\,'
 
 
 # A regular expression rule with some action code
@@ -38,6 +44,22 @@ def t_NUMBER(t):
 def t_FLOAT(t):
     r'\d+\.\d'
     t.value = float(t.value)
+    return t
+
+
+# TableFunctions
+def t_TABLE_C(t):
+    r'table'
+    return t
+
+
+def t_TABLE_R(t):
+    r'addRow'
+    return t
+
+
+def t_EXIT(t):
+    r'exit'
     return t
 
 
@@ -87,7 +109,7 @@ def p_calc(p):
     calc : expression
          | empty
     '''
-    print(p[1])
+    print(run(p[1]))
 
 
 def p_expression(p):
@@ -107,6 +129,42 @@ def p_expression_int_float(p):
     '''
     p[0] = p[1]
 
+# Table Parsing
+def p_createTable(p):
+    '''
+    expression : TABLE_C column
+    '''
+    print((p[1], p[2]))
+    p[0] = (p[1], p[2])
+
+
+def p_addRowToTable(p):
+    '''
+    expression : TABLE_R column
+    '''
+    print((p[1], p[2]))
+    p[0] = (p[1], p[2])
+
+
+def p_Column(p):
+    '''
+    column : STRING
+            | STRING COMMA column
+    '''
+    tempList = []
+    for thing in p:
+        if thing != None:
+            tempList.append(thing)
+    #print(tuple(tempList))
+    p[0] = (tuple(tempList))
+
+
+def p_exit(p):
+    '''
+    expression : EXIT
+    '''
+    exit(0)
+
 
 def p_empty(p):
     '''
@@ -114,6 +172,9 @@ def p_empty(p):
     '''
     p[0] = None
 
+
+def p_error(p):
+    print("Syntax error found!")
 
 parser = yacc.yacc()
 
@@ -127,9 +188,29 @@ parser = yacc.yacc()
 #     print(tok)
 
 # TESTING Parser
+
+def run(p):
+    if type(p) == tuple:
+        if p[0] == '+':
+            return run(p[1]) + run(p[2])
+        elif p[0] == '-':
+            return run(p[1]) - run(p[2])
+        elif p[0] == '*':
+            return run(p[1]) * run(p[2])
+        elif p[0] == '/':
+            return run(p[1]) / run(p[2])
+        elif p[0] == 'table' :
+            return print("funciono")
+    else:
+        return p
+
 while True:
     try:
-        s = input('')
+        s = input('>> ')
     except EOFError:  # ctr + D
         break
     parser.parse(s)
+
+
+# cashaer shopName 1000x1000
+# itemArea
