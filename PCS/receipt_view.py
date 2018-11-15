@@ -7,13 +7,15 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import functions as FT
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(291, 457)
         self.header_label = QtWidgets.QLabel(Form)
-        self.header_label.setGeometry(QtCore.QRect(10, 0, 47, 13))
+        self.header_label.setGeometry(QtCore.QRect(10, 0, 271, 13))
         self.header_label.setObjectName("header_label")
         self.plainTextEdit = QtWidgets.QPlainTextEdit(Form)
         self.plainTextEdit.setEnabled(False)
@@ -25,7 +27,7 @@ class Ui_Form(object):
         self.plainTextEdit.setCenterOnScroll(False)
         self.plainTextEdit.setObjectName("plainTextEdit")
         self.header_label_2 = QtWidgets.QLabel(Form)
-        self.header_label_2.setGeometry(QtCore.QRect(10, 360, 47, 13))
+        self.header_label_2.setGeometry(QtCore.QRect(10, 360, 271, 13))
         self.header_label_2.setObjectName("header_label_2")
         self.plainTextEdit_2 = QtWidgets.QPlainTextEdit(Form)
         self.plainTextEdit_2.setEnabled(False)
@@ -36,7 +38,7 @@ class Ui_Form(object):
         self.plainTextEdit_3.setGeometry(QtCore.QRect(10, 120, 271, 231))
         self.plainTextEdit_3.setObjectName("plainTextEdit_3")
         self.header_label_3 = QtWidgets.QLabel(Form)
-        self.header_label_3.setGeometry(QtCore.QRect(10, 100, 47, 13))
+        self.header_label_3.setGeometry(QtCore.QRect(10, 100, 271, 13))
         self.header_label_3.setObjectName("header_label_3")
 
         self.retranslateUi(Form)
@@ -49,9 +51,11 @@ class Ui_Form(object):
         self.header_label_2.setText(_translate("Form", "<html><head/><body><p>footer</p></body></html>"))
         self.header_label_3.setText(_translate("Form", "<html><head/><body><p>body</p></body></html>"))
 
+        FT.function().return_receipt(self)
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
     ui = Ui_Form()
