@@ -6,6 +6,8 @@ import ply.yacc as yacc
 reserved_keywords = ()  # function names and types shall be defined here
 
 tokens = (
+    'TRUE',
+    'FALSE',
     'NUMBER',
     'FLOAT',
     'PLUS',
@@ -20,6 +22,8 @@ tokens = (
     'TABLE_R',
     'COLUMN',
     'COMMA',
+    'report_item_type_enable',
+    'report_item_enable',
     'EXIT'
 )  # + list(reserved_keywords.values())
 
@@ -57,6 +61,23 @@ def t_TABLE_R(t):
     r'addRow'
     return t
 
+def t_true(t):
+    r't'
+    t.value = 1
+    return t
+
+def t_false(t):
+    r'f'
+    t.value = str(t.value)
+    return False
+
+def t_report_item_type_enable(t):
+    r'item_type_enable'
+    return t
+
+def t_report_item_enable(t):
+    r'item_enable'
+    return t
 
 def t_EXIT(t):
     r'exit'
@@ -158,6 +179,22 @@ def p_Column(p):
     #print(tuple(tempList))
     p[0] = (tuple(tempList))
 
+#report create view functions
+def p_boolean(p):
+    '''
+    boolean : FALSE
+            | TRUE
+    '''
+    p[0] = p[1]
+
+#reportCV_expression
+def p_report_create_view(p):
+    '''
+    expression : report_item_type_enable boolean
+                        | report_item_enable boolean 
+    '''
+    print((p[1], p[2]))
+    #p[0] = (p[1], p[2])
 
 def p_exit(p):
     '''

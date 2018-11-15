@@ -1,0 +1,477 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COLUMN
+    EQUALS
+    LPAREN
+    RPAREN
+
+Grammar
+
+Rule 0     S' -> calc
+Rule 1     calc -> expression
+Rule 2     calc -> empty
+Rule 3     expression -> expression MULTIPLY expression
+Rule 4     expression -> expression DIVIDE expression
+Rule 5     expression -> expression PLUS expression
+Rule 6     expression -> expression MINUS expression
+Rule 7     expression -> NUMBER
+Rule 8     expression -> FLOAT
+Rule 9     expression -> TABLE_C column
+Rule 10    expression -> TABLE_R column
+Rule 11    column -> STRING
+Rule 12    column -> STRING COMMA column
+Rule 13    boolean -> FALSE
+Rule 14    boolean -> TRUE
+Rule 15    expression -> report_item_type_enable boolean
+Rule 16    expression -> report_item_enable boolean
+Rule 17    expression -> EXIT
+Rule 18    empty -> <empty>
+
+Terminals, with rules where they appear
+
+COLUMN               : 
+COMMA                : 12
+DIVIDE               : 4
+EQUALS               : 
+EXIT                 : 17
+FALSE                : 13
+FLOAT                : 8
+LPAREN               : 
+MINUS                : 6
+MULTIPLY             : 3
+NUMBER               : 7
+PLUS                 : 5
+RPAREN               : 
+STRING               : 11 12
+TABLE_C              : 9
+TABLE_R              : 10
+TRUE                 : 14
+error                : 
+report_item_enable   : 16
+report_item_type_enable : 15
+
+Nonterminals, with rules where they appear
+
+boolean              : 15 16
+calc                 : 0
+column               : 9 10 12
+empty                : 2
+expression           : 1 3 3 4 4 5 5 6 6
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . calc
+    (1) calc -> . expression
+    (2) calc -> . empty
+    (3) expression -> . expression MULTIPLY expression
+    (4) expression -> . expression DIVIDE expression
+    (5) expression -> . expression PLUS expression
+    (6) expression -> . expression MINUS expression
+    (7) expression -> . NUMBER
+    (8) expression -> . FLOAT
+    (9) expression -> . TABLE_C column
+    (10) expression -> . TABLE_R column
+    (15) expression -> . report_item_type_enable boolean
+    (16) expression -> . report_item_enable boolean
+    (17) expression -> . EXIT
+    (18) empty -> .
+
+    NUMBER          shift and go to state 4
+    FLOAT           shift and go to state 5
+    TABLE_C         shift and go to state 6
+    TABLE_R         shift and go to state 7
+    report_item_type_enable shift and go to state 8
+    report_item_enable shift and go to state 9
+    EXIT            shift and go to state 10
+    $end            reduce using rule 18 (empty -> .)
+
+    calc                           shift and go to state 1
+    expression                     shift and go to state 2
+    empty                          shift and go to state 3
+
+state 1
+
+    (0) S' -> calc .
+
+
+
+state 2
+
+    (1) calc -> expression .
+    (3) expression -> expression . MULTIPLY expression
+    (4) expression -> expression . DIVIDE expression
+    (5) expression -> expression . PLUS expression
+    (6) expression -> expression . MINUS expression
+
+    $end            reduce using rule 1 (calc -> expression .)
+    MULTIPLY        shift and go to state 11
+    DIVIDE          shift and go to state 12
+    PLUS            shift and go to state 13
+    MINUS           shift and go to state 14
+
+
+state 3
+
+    (2) calc -> empty .
+
+    $end            reduce using rule 2 (calc -> empty .)
+
+
+state 4
+
+    (7) expression -> NUMBER .
+
+    MULTIPLY        reduce using rule 7 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 7 (expression -> NUMBER .)
+    PLUS            reduce using rule 7 (expression -> NUMBER .)
+    MINUS           reduce using rule 7 (expression -> NUMBER .)
+    $end            reduce using rule 7 (expression -> NUMBER .)
+
+
+state 5
+
+    (8) expression -> FLOAT .
+
+    MULTIPLY        reduce using rule 8 (expression -> FLOAT .)
+    DIVIDE          reduce using rule 8 (expression -> FLOAT .)
+    PLUS            reduce using rule 8 (expression -> FLOAT .)
+    MINUS           reduce using rule 8 (expression -> FLOAT .)
+    $end            reduce using rule 8 (expression -> FLOAT .)
+
+
+state 6
+
+    (9) expression -> TABLE_C . column
+    (11) column -> . STRING
+    (12) column -> . STRING COMMA column
+
+    STRING          shift and go to state 16
+
+    column                         shift and go to state 15
+
+state 7
+
+    (10) expression -> TABLE_R . column
+    (11) column -> . STRING
+    (12) column -> . STRING COMMA column
+
+    STRING          shift and go to state 16
+
+    column                         shift and go to state 17
+
+state 8
+
+    (15) expression -> report_item_type_enable . boolean
+    (13) boolean -> . FALSE
+    (14) boolean -> . TRUE
+
+    FALSE           shift and go to state 19
+    TRUE            shift and go to state 20
+
+    boolean                        shift and go to state 18
+
+state 9
+
+    (16) expression -> report_item_enable . boolean
+    (13) boolean -> . FALSE
+    (14) boolean -> . TRUE
+
+    FALSE           shift and go to state 19
+    TRUE            shift and go to state 20
+
+    boolean                        shift and go to state 21
+
+state 10
+
+    (17) expression -> EXIT .
+
+    MULTIPLY        reduce using rule 17 (expression -> EXIT .)
+    DIVIDE          reduce using rule 17 (expression -> EXIT .)
+    PLUS            reduce using rule 17 (expression -> EXIT .)
+    MINUS           reduce using rule 17 (expression -> EXIT .)
+    $end            reduce using rule 17 (expression -> EXIT .)
+
+
+state 11
+
+    (3) expression -> expression MULTIPLY . expression
+    (3) expression -> . expression MULTIPLY expression
+    (4) expression -> . expression DIVIDE expression
+    (5) expression -> . expression PLUS expression
+    (6) expression -> . expression MINUS expression
+    (7) expression -> . NUMBER
+    (8) expression -> . FLOAT
+    (9) expression -> . TABLE_C column
+    (10) expression -> . TABLE_R column
+    (15) expression -> . report_item_type_enable boolean
+    (16) expression -> . report_item_enable boolean
+    (17) expression -> . EXIT
+
+    NUMBER          shift and go to state 4
+    FLOAT           shift and go to state 5
+    TABLE_C         shift and go to state 6
+    TABLE_R         shift and go to state 7
+    report_item_type_enable shift and go to state 8
+    report_item_enable shift and go to state 9
+    EXIT            shift and go to state 10
+
+    expression                     shift and go to state 22
+
+state 12
+
+    (4) expression -> expression DIVIDE . expression
+    (3) expression -> . expression MULTIPLY expression
+    (4) expression -> . expression DIVIDE expression
+    (5) expression -> . expression PLUS expression
+    (6) expression -> . expression MINUS expression
+    (7) expression -> . NUMBER
+    (8) expression -> . FLOAT
+    (9) expression -> . TABLE_C column
+    (10) expression -> . TABLE_R column
+    (15) expression -> . report_item_type_enable boolean
+    (16) expression -> . report_item_enable boolean
+    (17) expression -> . EXIT
+
+    NUMBER          shift and go to state 4
+    FLOAT           shift and go to state 5
+    TABLE_C         shift and go to state 6
+    TABLE_R         shift and go to state 7
+    report_item_type_enable shift and go to state 8
+    report_item_enable shift and go to state 9
+    EXIT            shift and go to state 10
+
+    expression                     shift and go to state 23
+
+state 13
+
+    (5) expression -> expression PLUS . expression
+    (3) expression -> . expression MULTIPLY expression
+    (4) expression -> . expression DIVIDE expression
+    (5) expression -> . expression PLUS expression
+    (6) expression -> . expression MINUS expression
+    (7) expression -> . NUMBER
+    (8) expression -> . FLOAT
+    (9) expression -> . TABLE_C column
+    (10) expression -> . TABLE_R column
+    (15) expression -> . report_item_type_enable boolean
+    (16) expression -> . report_item_enable boolean
+    (17) expression -> . EXIT
+
+    NUMBER          shift and go to state 4
+    FLOAT           shift and go to state 5
+    TABLE_C         shift and go to state 6
+    TABLE_R         shift and go to state 7
+    report_item_type_enable shift and go to state 8
+    report_item_enable shift and go to state 9
+    EXIT            shift and go to state 10
+
+    expression                     shift and go to state 24
+
+state 14
+
+    (6) expression -> expression MINUS . expression
+    (3) expression -> . expression MULTIPLY expression
+    (4) expression -> . expression DIVIDE expression
+    (5) expression -> . expression PLUS expression
+    (6) expression -> . expression MINUS expression
+    (7) expression -> . NUMBER
+    (8) expression -> . FLOAT
+    (9) expression -> . TABLE_C column
+    (10) expression -> . TABLE_R column
+    (15) expression -> . report_item_type_enable boolean
+    (16) expression -> . report_item_enable boolean
+    (17) expression -> . EXIT
+
+    NUMBER          shift and go to state 4
+    FLOAT           shift and go to state 5
+    TABLE_C         shift and go to state 6
+    TABLE_R         shift and go to state 7
+    report_item_type_enable shift and go to state 8
+    report_item_enable shift and go to state 9
+    EXIT            shift and go to state 10
+
+    expression                     shift and go to state 25
+
+state 15
+
+    (9) expression -> TABLE_C column .
+
+    MULTIPLY        reduce using rule 9 (expression -> TABLE_C column .)
+    DIVIDE          reduce using rule 9 (expression -> TABLE_C column .)
+    PLUS            reduce using rule 9 (expression -> TABLE_C column .)
+    MINUS           reduce using rule 9 (expression -> TABLE_C column .)
+    $end            reduce using rule 9 (expression -> TABLE_C column .)
+
+
+state 16
+
+    (11) column -> STRING .
+    (12) column -> STRING . COMMA column
+
+    MULTIPLY        reduce using rule 11 (column -> STRING .)
+    DIVIDE          reduce using rule 11 (column -> STRING .)
+    PLUS            reduce using rule 11 (column -> STRING .)
+    MINUS           reduce using rule 11 (column -> STRING .)
+    $end            reduce using rule 11 (column -> STRING .)
+    COMMA           shift and go to state 26
+
+
+state 17
+
+    (10) expression -> TABLE_R column .
+
+    MULTIPLY        reduce using rule 10 (expression -> TABLE_R column .)
+    DIVIDE          reduce using rule 10 (expression -> TABLE_R column .)
+    PLUS            reduce using rule 10 (expression -> TABLE_R column .)
+    MINUS           reduce using rule 10 (expression -> TABLE_R column .)
+    $end            reduce using rule 10 (expression -> TABLE_R column .)
+
+
+state 18
+
+    (15) expression -> report_item_type_enable boolean .
+
+    MULTIPLY        reduce using rule 15 (expression -> report_item_type_enable boolean .)
+    DIVIDE          reduce using rule 15 (expression -> report_item_type_enable boolean .)
+    PLUS            reduce using rule 15 (expression -> report_item_type_enable boolean .)
+    MINUS           reduce using rule 15 (expression -> report_item_type_enable boolean .)
+    $end            reduce using rule 15 (expression -> report_item_type_enable boolean .)
+
+
+state 19
+
+    (13) boolean -> FALSE .
+
+    MULTIPLY        reduce using rule 13 (boolean -> FALSE .)
+    DIVIDE          reduce using rule 13 (boolean -> FALSE .)
+    PLUS            reduce using rule 13 (boolean -> FALSE .)
+    MINUS           reduce using rule 13 (boolean -> FALSE .)
+    $end            reduce using rule 13 (boolean -> FALSE .)
+
+
+state 20
+
+    (14) boolean -> TRUE .
+
+    MULTIPLY        reduce using rule 14 (boolean -> TRUE .)
+    DIVIDE          reduce using rule 14 (boolean -> TRUE .)
+    PLUS            reduce using rule 14 (boolean -> TRUE .)
+    MINUS           reduce using rule 14 (boolean -> TRUE .)
+    $end            reduce using rule 14 (boolean -> TRUE .)
+
+
+state 21
+
+    (16) expression -> report_item_enable boolean .
+
+    MULTIPLY        reduce using rule 16 (expression -> report_item_enable boolean .)
+    DIVIDE          reduce using rule 16 (expression -> report_item_enable boolean .)
+    PLUS            reduce using rule 16 (expression -> report_item_enable boolean .)
+    MINUS           reduce using rule 16 (expression -> report_item_enable boolean .)
+    $end            reduce using rule 16 (expression -> report_item_enable boolean .)
+
+
+state 22
+
+    (3) expression -> expression MULTIPLY expression .
+    (3) expression -> expression . MULTIPLY expression
+    (4) expression -> expression . DIVIDE expression
+    (5) expression -> expression . PLUS expression
+    (6) expression -> expression . MINUS expression
+
+    MULTIPLY        reduce using rule 3 (expression -> expression MULTIPLY expression .)
+    DIVIDE          reduce using rule 3 (expression -> expression MULTIPLY expression .)
+    PLUS            reduce using rule 3 (expression -> expression MULTIPLY expression .)
+    MINUS           reduce using rule 3 (expression -> expression MULTIPLY expression .)
+    $end            reduce using rule 3 (expression -> expression MULTIPLY expression .)
+
+  ! MULTIPLY        [ shift and go to state 11 ]
+  ! DIVIDE          [ shift and go to state 12 ]
+  ! PLUS            [ shift and go to state 13 ]
+  ! MINUS           [ shift and go to state 14 ]
+
+
+state 23
+
+    (4) expression -> expression DIVIDE expression .
+    (3) expression -> expression . MULTIPLY expression
+    (4) expression -> expression . DIVIDE expression
+    (5) expression -> expression . PLUS expression
+    (6) expression -> expression . MINUS expression
+
+    MULTIPLY        reduce using rule 4 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 4 (expression -> expression DIVIDE expression .)
+    PLUS            reduce using rule 4 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 4 (expression -> expression DIVIDE expression .)
+    $end            reduce using rule 4 (expression -> expression DIVIDE expression .)
+
+  ! MULTIPLY        [ shift and go to state 11 ]
+  ! DIVIDE          [ shift and go to state 12 ]
+  ! PLUS            [ shift and go to state 13 ]
+  ! MINUS           [ shift and go to state 14 ]
+
+
+state 24
+
+    (5) expression -> expression PLUS expression .
+    (3) expression -> expression . MULTIPLY expression
+    (4) expression -> expression . DIVIDE expression
+    (5) expression -> expression . PLUS expression
+    (6) expression -> expression . MINUS expression
+
+    PLUS            reduce using rule 5 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 5 (expression -> expression PLUS expression .)
+    $end            reduce using rule 5 (expression -> expression PLUS expression .)
+    MULTIPLY        shift and go to state 11
+    DIVIDE          shift and go to state 12
+
+  ! MULTIPLY        [ reduce using rule 5 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 5 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ shift and go to state 13 ]
+  ! MINUS           [ shift and go to state 14 ]
+
+
+state 25
+
+    (6) expression -> expression MINUS expression .
+    (3) expression -> expression . MULTIPLY expression
+    (4) expression -> expression . DIVIDE expression
+    (5) expression -> expression . PLUS expression
+    (6) expression -> expression . MINUS expression
+
+    PLUS            reduce using rule 6 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 6 (expression -> expression MINUS expression .)
+    $end            reduce using rule 6 (expression -> expression MINUS expression .)
+    MULTIPLY        shift and go to state 11
+    DIVIDE          shift and go to state 12
+
+  ! MULTIPLY        [ reduce using rule 6 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 6 (expression -> expression MINUS expression .) ]
+  ! PLUS            [ shift and go to state 13 ]
+  ! MINUS           [ shift and go to state 14 ]
+
+
+state 26
+
+    (12) column -> STRING COMMA . column
+    (11) column -> . STRING
+    (12) column -> . STRING COMMA column
+
+    STRING          shift and go to state 16
+
+    column                         shift and go to state 27
+
+state 27
+
+    (12) column -> STRING COMMA column .
+
+    MULTIPLY        reduce using rule 12 (column -> STRING COMMA column .)
+    DIVIDE          reduce using rule 12 (column -> STRING COMMA column .)
+    PLUS            reduce using rule 12 (column -> STRING COMMA column .)
+    MINUS           reduce using rule 12 (column -> STRING COMMA column .)
+    $end            reduce using rule 12 (column -> STRING COMMA column .)
+
