@@ -229,7 +229,8 @@ def p_calc(p):
          | tableExp
          | pathexpr
          | receiptexpr
-         | mainviewexp
+         | mainviewexpr
+         | reportexpr
          | empty
     '''
     print(run(p[1]))
@@ -257,7 +258,6 @@ def p_expression_int_float(p):
     '''
     expression : NUMBER
                | FLOAT
-               | PATHNAME
     '''
     p[0] = p[1]
 
@@ -295,7 +295,7 @@ def p_receiptexpr_append(p):
 # Main View
 def p_mainviewexp(p) :
     '''
-    mainviewexp : VIEW SET_SHOP_NAME STRING
+    mainviewexpr : VIEW SET_SHOP_NAME STRING
                 | VIEW SET_DIMENSION NUMBER COMMA NUMBER
                 | VIEW SET_CART_ROW_SIZE NUMBER
                 | VIEW SET_CART_QUANTITY_ENABLE boolean
@@ -356,7 +356,7 @@ def p_Column(p):
 #reportCV_expression
 def p_report_create_view(p):
     '''
-    expression : item_type_enable boolean 
+    reportexpr : item_type_enable boolean
                 | item_enable boolean
     '''
     print((p[1], p[2]))
