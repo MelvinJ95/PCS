@@ -8,10 +8,13 @@ reserved_keywords = ()  # function names and types shall be defined here
 tokens = (
     'NUMBER',
     'FLOAT',
+    'TRUE',
+    'FALSE',
     'PLUS',
     'MINUS',
     'MULTIPLY',
     'DIVIDE',
+    'PERIOD',
     'LPAREN',
     'RPAREN',
     'EQUALS',
@@ -20,6 +23,14 @@ tokens = (
     'TABLE_R',
     'COLUMN',
     'COMMA',
+    'PATHNAME',
+    'HEAD',
+    'BODY',
+    'FOOTER',
+    'RECEIPT',
+    'APPEND',
+    'CLEAR',
+    'TO',
     'EXIT'
 )  # + list(reserved_keywords.values())
 
@@ -32,6 +43,7 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_EQUALS = r'\='
 t_COMMA = r'\,'
+t_PERIOD = r'\.'
 
 
 # A regular expression rule with some action code
@@ -46,6 +58,17 @@ def t_FLOAT(t):
     t.value = float(t.value)
     return t
 
+def t_TRUE(t):
+    r'(true)'
+    t.value = True
+    return t
+
+
+def t_FALSE(t):
+    r'(false)'
+    t.value = False
+    return t
+
 
 # TableFunctions
 def t_TABLE_C(t):
@@ -55,6 +78,43 @@ def t_TABLE_C(t):
 
 def t_TABLE_R(t):
     r'addRow'
+    return t
+
+
+# HEAD_BODY_FOOTER
+def t_HEAD(t):
+    r'head'
+    return t
+
+
+def t_BODY(t):
+    r'body'
+    return t
+
+
+def t_FOOTER(t):
+    r'footer'
+    return t
+
+
+# ReceiptFunctions
+def t_RECEIPT(t):
+    r'receipt'
+    return t
+
+
+def t_APPEND(t):
+    r'append'
+    return t
+
+
+def t_CLEAR(t):
+    r'clear'
+    return t
+
+
+def t_TO(t):
+    r'to'
     return t
 
 
@@ -69,9 +129,15 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
 
 
+
 # A string containing ignored characters (spaces and tabs)
 t_ignore = ' \t'
 t_ignore_COMMENT = r'\#.*'
+
+
+def t_PATHNAME(t):
+    r'add'
+    return t
 
 
 def t_NAME(t):
@@ -107,9 +173,21 @@ precedence = (
 def p_calc(p):
     '''
     calc : expression
+         | tableExp
+         | pathexpr
+         | receiptexpr
+         | boolean
          | empty
     '''
     print(run(p[1]))
+
+
+def p_boolean(p):
+    '''
+    boolean : TRUE
+            | FALSE
+    '''
+    p[0] = p[1]
 
 
 def p_expression(p):
@@ -126,13 +204,45 @@ def p_expression_int_float(p):
     '''
     expression : NUMBER
                | FLOAT
+               | PATHNAME
     '''
     p[0] = p[1]
+
+# Path Parsing
+def p_pathexpr(p):
+    '''
+    pathexpr : PERIOD PERIOD DIVIDE pathexpr
+           | PERIOD DIVIDE pathexpr
+           | STRING DIVIDE pathexpr
+           | STRING DIVIDE filename
+    filename : STRING PERIOD STRING
+           | STRING
+    '''
+    p[0] = p[1]
+
+# Receipt Parsing
+def p_receiptexpr_creat(p):
+    '''
+    receiptexpr : RECEIPT CLEAR HEAD
+            | RECEIPT CLEAR BODY
+            | RECEIPT CLEAR FOOTER
+    '''
+    print((p[1], p[2], p[3]))
+    p[0] = (p[1],p[2],p[3])
+
+def p_receiptexpr_append(p):
+    '''
+    receiptexpr : RECEIPT APPEND STRING TO HEAD
+            | RECEIPT APPEND STRING TO BODY
+            | RECEIPT APPEND STRING TO FOOTER
+    '''
+    print((p[1],p[2],p[3],p[4],p[5]))
+    p[0] = (p[1],p[2],p[3],p[4],p[5])
 
 # Table Parsing
 def p_createTable(p):
     '''
-    expression : TABLE_C column
+    tableExp : TABLE_C column
     '''
     print((p[1], p[2]))
     p[0] = (p[1], p[2])
@@ -140,7 +250,7 @@ def p_createTable(p):
 
 def p_addRowToTable(p):
     '''
-    expression : TABLE_R column
+    tableExp : TABLE_R column
     '''
     print((p[1], p[2]))
     p[0] = (p[1], p[2])
