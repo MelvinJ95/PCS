@@ -78,11 +78,11 @@ def t_FALSE(t):
     return t
 
 def t_item_type_enable(t):
-    r'item_type_enable'
+    r'report\ item_type_enable'
     return t
 
 def t_item_enable(t):
-    r'item_enable'
+    r'report\ item_enable'
     return t
 
 def t_EXIT(t):
