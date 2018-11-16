@@ -17,6 +17,40 @@
 -Added functionality to clear Recept_view footer's header text 
 -Added functionality to change Recept_view footer's header text
 
+Tokens:
+NUMBER              ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+TRUE                ::= true
+FALSE               ::= FALSE
+PLUS                ::= '+'
+MINUS               ::= '-'
+MULTIPLY            ::= '*'
+DIVIDE              ::= '/'
+LPAREN              ::= '('
+RPAREN              ::= ')'
+EQUALS              ::= '='
+STRING              ::= '[a-zA-Z_][a-zA-Z_0-9]*'
+TABLE_C             ::= 'table'
+TABLE_R             ::= 'addRow'
+COMMA               ::= ','
+PERIOD              ::= '.'
+VIEW                ::= 'view'
+SET_SHOP_NAME       ::= 'set_shop_name'
+SET_DIMENSION       ::= 'set_dimension'
+SET_CART_ROW_SIZE   ::= 'set_cart_row_size'
+ELEMENT_GRID_ADD    ::= 'element_grid_add'
+HEAD                ::= 'head'
+BODY                ::= 'body'
+FOOTER              ::= 'footer'
+RECEIPT             ::= 'receipt'
+APPEND              ::= 'append'
+CLEAR               ::= 'clear'
+TO                  ::= 'to'
+ITEM_TYPE_ENABLE    ::= 'report\ item_type_enable'
+ITEM_ENABLE         ::= 'report\ item_enable'
+EXIT                ::= 'exit'
+NEWLINE             ::= '\n+'
+SET_CART_QUANTITY_ENABLE    ::= 'set_cart_quantity_enable'
+
 
 GRAMMAR:
 calc ::= expression
@@ -80,4 +114,4 @@ column ::= STRING
 reportexpr ::= item_type_enable boolean
         | item_enable boolean
 
-
+FLOAT ::= NUMBER\.NUMBER
