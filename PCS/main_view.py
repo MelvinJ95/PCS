@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 import store_item
 from PyQt5 import QtCore, QtGui, QtWidgets
-from report_view import Ui_report_view
+#from report_view import Ui_report_view
 import functions as FT
 
 class Ui_MainWindow(object):
