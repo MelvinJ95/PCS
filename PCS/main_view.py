@@ -8,9 +8,40 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import functions as FT
-import store_item
+from store_item import store_item
 
 class Ui_MainWindow(object):
+    global element_index
+
+    def add_toCart(self,item):
+        item_to_send = item
+        print(str(item.data(QtCore.Qt.UserRole)))
+        FT.function().addtoCart(self, item_to_send)
+
+    def report(self):
+        FT.function().report()
+
+    def addElement(self, sitem):
+        item = QtWidgets.QListWidgetItem()
+        item.setData(QtCore.Qt.UserRole, sitem)
+        item.setTextAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignVCenter)
+        font = QtGui.QFont()
+        font.setPointSize(7)
+        item.setFont(font)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(sitem.icon), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        item.setIcon(icon)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        brush.setStyle(QtCore.Qt.NoBrush)
+        item.setBackground(brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        brush.setStyle(QtCore.Qt.NoBrush)
+        item.setForeground(brush)
+        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+        self.elements_grid.addItem(item)
+
+        # element_index = element_index + 1
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
@@ -48,42 +79,42 @@ class Ui_MainWindow(object):
         self.elements_grid.setWordWrap(False)
         self.elements_grid.setSelectionRectVisible(True)
         self.elements_grid.setObjectName("elements_grid")
-        item = QtWidgets.QListWidgetItem()
-        self.elements_grid.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.elements_grid.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignVCenter)
-        font = QtGui.QFont()
-        font.setPointSize(7)
-        item.setFont(font)
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("jamonilla.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        item.setIcon(icon)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.NoBrush)
-        item.setBackground(brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.NoBrush)
-        item.setForeground(brush)
-        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
-        self.elements_grid.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignVCenter)
-        font = QtGui.QFont()
-        font.setPointSize(7)
-        item.setFont(font)
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("papa.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        item.setIcon(icon)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.NoBrush)
-        item.setBackground(brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.NoBrush)
-        item.setForeground(brush)
-        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
-        self.elements_grid.addItem(item)
+        # item = QtWidgets.QListWidgetItem()
+        # self.elements_grid.addItem(item)
+        # item = QtWidgets.QListWidgetItem()
+        # self.elements_grid.addItem(item)
+        # item = QtWidgets.QListWidgetItem()
+        # item.setTextAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignVCenter)
+        # font = QtGui.QFont()
+        # font.setPointSize(7)
+        # item.setFont(font)
+        # icon = QtGui.QIcon()
+        # icon.addPixmap(QtGui.QPixmap("jamonilla.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        # item.setIcon(icon)
+        # brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        # brush.setStyle(QtCore.Qt.NoBrush)
+        # item.setBackground(brush)
+        # brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        # brush.setStyle(QtCore.Qt.NoBrush)
+        # item.setForeground(brush)
+        # item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+        # self.elements_grid.addItem(item)
+        # item = QtWidgets.QListWidgetItem()
+        # item.setTextAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignVCenter)
+        # font = QtGui.QFont()
+        # font.setPointSize(7)
+        # item.setFont(font)
+        # icon = QtGui.QIcon()
+        # icon.addPixmap(QtGui.QPixmap("papa.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        # item.setIcon(icon)
+        # brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        # brush.setStyle(QtCore.Qt.NoBrush)
+        # item.setBackground(brush)
+        # brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        # brush.setStyle(QtCore.Qt.NoBrush)
+        # item.setForeground(brush)
+        # item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+        # self.elements_grid.addItem(item)
         item = QtWidgets.QListWidgetItem()
         self.elements_grid.addItem(item)
         self.cart_table = QtWidgets.QTableWidget(self.main_frame)
@@ -142,6 +173,9 @@ class Ui_MainWindow(object):
         self.elements_grid.setCurrentRow(-1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        #initializing element index
+        # element_index = 0
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -149,16 +183,16 @@ class Ui_MainWindow(object):
         self.elements_grid.setSortingEnabled(True)
         __sortingEnabled = self.elements_grid.isSortingEnabled()
         self.elements_grid.setSortingEnabled(False)
-        item = self.elements_grid.item(0)
-        item.setText(_translate("MainWindow", "hola 3"))
-        item = self.elements_grid.item(1)
-        item.setText(_translate("MainWindow", "hola 4"))
-        item = self.elements_grid.item(2)
-        item.setText(_translate("MainWindow", "hola 5"))
-        item = self.elements_grid.item(3)
-        # item.setText(_translate("MainWindow", "hola1"))
-        item = self.elements_grid.item(4)
-        item.setText(_translate("MainWindow", "hola2"))
+        # item = self.elements_grid.item(0)
+        # item.setText(_translate("MainWindow", "hola 3"))
+        # item = self.elements_grid.item(1)
+        # item.setText(_translate("MainWindow", "hola 4"))
+        # item = self.elements_grid.item(2)
+        # item.setText(_translate("MainWindow", "hola 5"))
+        # item = self.elements_grid.item(3)
+        # # item.setText(_translate("MainWindow", "hola1"))
+        # item = self.elements_grid.item(4)
+        # item.setText(_translate("MainWindow", "hola2"))
         self.elements_grid.setSortingEnabled(__sortingEnabled)
         item = self.cart_table.verticalHeaderItem(0)
         item.setText(_translate("MainWindow", "1"))
@@ -180,11 +214,36 @@ class Ui_MainWindow(object):
         self.total_table.setSortingEnabled(__sortingEnabled)
         self.check_out_button_2.setText(_translate("MainWindow", "Report"))
 
+        #ITEM EVENT ACTION
+        self.elements_grid.itemClicked.connect(self.add_toCart)
+        #USER CANT EDIT ITEM/COST HEADERS
+        self.cart_table.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+
+        #BUTTON EVENTS
+        self.check_out_button_2.clicked.connect(self.report)
+
+        #Give function an Instance of Main Window to have access to UI Elements 
+        FT.function().returnObj(self)
+
+        #adding to cart EVENT
+
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
+
+    #Adding items
+    item = store_item.makeItem("jamonilla.jpg", "jamonilla", "food", 2.15, 1)
+    ui.addElement(item)
+    item = store_item.makeItem("rice.jpg", "rice", "food", 5.14, 1)
+    ui.addElement(item)
+    item = store_item.makeItem("coke.jpg", "coke", "food", 1.00, 1)
+    ui.addElement(item)
+    item = store_item.makeItem("papa.png", "papa", "food", 1.15, 1)
+    ui.addElement(item)
+
     MainWindow.show()
     sys.exit(app.exec_())

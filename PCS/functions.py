@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from report_view import Ui_report_view
-#from main_view import Ui_MainWindow
+from main_view import Ui_MainWindow
 from create_report_view import Ui_reportCreateView as RCV
 from receipt_view import Ui_Form
 
@@ -71,5 +71,4 @@ class function(object):
     def appendToFooter(self,x):
         Ui_Form.header_label_2.setText(QtCore.QCoreApplication.translate("Form", "<html><head/><body><p align = \'center\'>" + x + "</p></body></html>")) #centered
 
-    def addElement(self, element):
-
+    # def addElement(self, element):
