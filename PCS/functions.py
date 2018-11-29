@@ -71,4 +71,5 @@ class function(object):
     def appendToFooter(self,x):
         Ui_Form.header_label_2.setText(QtCore.QCoreApplication.translate("Form", "<html><head/><body><p align = \'center\'>" + x + "</p></body></html>")) #centered
 
+    def addElement(self, element):
 

@@ -6,4 +6,5 @@ class store_item:
 		self.type = type 
 		self.price = price 
 		self.qty = qty 
-		
+	
+	

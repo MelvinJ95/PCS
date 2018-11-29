@@ -1,6 +1,5 @@
 import ply.lex as lex
 import ply.yacc as yacc
-from PCS import tableManager as tableM
 
 # -- Lexer --
 
@@ -302,6 +301,7 @@ def p_mainviewexp(p) :
                 | VIEW SET_CART_QUANTITY_ENABLE boolean
                 | VIEW ELEMENT_GRID_ADD path_series
     '''
+    str(p[2])
     print((p[1], p[2], p[3]))
     p[0] = (p[1],p[2],p[3])
 
@@ -320,20 +320,18 @@ def p_path_series(p):
 # Table Parsing
 def p_createTable(p):
     '''
-    tableExp : TABLE_C STRING column
+    tableExp : TABLE_C column
     '''
-    #print((p[1], p[2]))
-    p[0] = (p[2], p[3])
-    tableM.create_table(p[0])
+    print((p[1], p[2]))
+    p[0] = (p[1], p[2])
 
 
 def p_addRowToTable(p):
     '''
-    tableExp : TABLE_R STRING column
+    tableExp : TABLE_R column
     '''
-    #print((p[1], p[2], p[3]))
-    p[0] = (p[2], p[3])
-    tableM.add_row(p[0])
+    print((p[1], p[2]))
+    p[0] = (p[1], p[2])
 
 
 def p_Column(p):
@@ -408,6 +406,8 @@ def run(p):
             return run(p[1]) * run(p[2])
         elif p[0] == '/':
             return run(p[1]) / run(p[2])
+        elif p[0] == 'table' :
+            return print("funciono")
     else:
         return p
 
