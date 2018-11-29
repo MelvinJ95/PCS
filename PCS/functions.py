@@ -3,10 +3,12 @@ from report_view import Ui_report_view
 from main_view import Ui_MainWindow
 from create_report_view import Ui_reportCreateView as RCV
 from receipt_view import Ui_Form
+# from store_item import store_item
+
+total_cost = 0
 
 class function(object):
     global Ui_MainWindow
-    global total_cost
     global Ui_Form
 
     def returnObj(self,object): #COPY OF MAIN VIEW INSTANCE
@@ -17,13 +19,18 @@ class function(object):
         global Ui_Form
         Ui_Form = object
 
-    def addtoCart(self, object,item):
+    def addtoCart(self, object, item):
         global total_cost  #Declared again to edit value
         rowCount = Ui_MainWindow.cart_table.rowCount()
         Ui_MainWindow.cart_table.insertRow(rowCount)
-        Ui_MainWindow.cart_table.setItem(rowCount - 1, 0, QtWidgets.QTableWidgetItem(item.text()))
-        rowCount = rowCount + 1
-        # total_cost += ITEM COSTS   TO BE EDITED ----------------------------------------------------------------------
+        rowCount -= 1
+        Ui_MainWindow.cart_table.setItem(rowCount, 0, QtWidgets.QTableWidgetItem(item.name))
+        Ui_MainWindow.cart_table.setItem(rowCount, 1, QtWidgets.QTableWidgetItem(str(item.price)))
+        Ui_MainWindow.cart_table.item(rowCount, 1).setTextAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
+        # rowCount = rowCount + 1
+        total_cost += item.price   #TO BE EDITED 
+        Ui_MainWindow.total_table.setItem(0, 1, QtWidgets.QTableWidgetItem(str(round(total_cost, 2))))
+        Ui_MainWindow.total_table.item(0, 1).setTextAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
         # Ui_MainWindow.total_table.setItem(main_view.total_table.rowCount()-1, 1, QtWidgets.QTableWidgetItem(total_cost)) REMOVE COMMENT ONCED TOTAL COST IS DEFINED
 
 

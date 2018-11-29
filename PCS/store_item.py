@@ -1,20 +1,20 @@
 class store_item(object): 
 
-	def _init_(self, icon, name, stype, price, qty=0):
+	def _init_(self, icon, name, stype, price):
 		# self.index = index
 		self.icon = icon 
 		self.name = name
 		self.type = stype 
 		self.price = price 
-		self.qty = qty 
+		self.qty = 0
 
-	def makeItem(self, icon, name, stype, price, qty=0):
+	def makeItem(icon, name, stype, price):
 		item = store_item()
 		item.icon = icon
 		item.name = name
 		item.type = stype
 		item.price = price
-		item.price = qty
+		# item.qty = qty
 		return item
 
 	def __str__(self):

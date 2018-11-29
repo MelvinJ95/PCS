@@ -14,7 +14,7 @@ class Ui_MainWindow(object):
     global element_index
 
     def add_toCart(self,item):
-        item_to_send = item
+        item_to_send = item.data(QtCore.Qt.UserRole)
         print(str(item.data(QtCore.Qt.UserRole)))
         FT.function().addtoCart(self, item_to_send)
 
@@ -236,13 +236,13 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
 
     #Adding items
-    item = store_item.makeItem("jamonilla.jpg", "jamonilla", "food", 2.15, 1)
+    item = store_item.makeItem("jamonilla.jpg", "jamonilla", "food", 2.15)
     ui.addElement(item)
-    item = store_item.makeItem("rice.jpg", "rice", "food", 5.14, 1)
+    item = store_item.makeItem("rice.jpg", "rice", "food", 5.14)
     ui.addElement(item)
-    item = store_item.makeItem("coke.jpg", "coke", "food", 1.00, 1)
+    item = store_item.makeItem("coke.jpg", "coke", "food", 1.00)
     ui.addElement(item)
-    item = store_item.makeItem("papa.png", "papa", "food", 1.15, 1)
+    item = store_item.makeItem("papa.png", "papa", "food", 1.15)
     ui.addElement(item)
 
     MainWindow.show()
