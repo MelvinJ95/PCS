@@ -1,5 +1,9 @@
 import ply.lex as lex
 import ply.yacc as yacc
+from main_view import Ui_MainWindow
+import tableManager as tm
+from PyQt5 import QtCore, QtGui, QtWidgets
+from store_item import store_item
 
 # -- Lexer --
 
@@ -195,6 +199,7 @@ def t_PATHNAME(t):
 
 def t_NAME(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
+    # r'[a-zA-Z0-9_.][a-zA-Z0-9]*'
     # t.type = reserved_keywords.get(t.value, 'STRING')  # Check for reserved words
     t.type = 'STRING'
     return t
@@ -235,6 +240,12 @@ def p_calc(p):
     '''
     print(run(p[1]))
 
+def p_id(p):
+    '''
+    id : FLOAT
+        | STRING
+    '''
+    p[0] = p[1]
 
 def p_boolean(p):
     '''
@@ -295,15 +306,29 @@ def p_receiptexpr_append(p):
 # Main View
 def p_mainviewexp(p) :
     '''
-    mainviewexpr : VIEW SET_SHOP_NAME STRING
+    mainviewexpr : VIEW STRING
+                | VIEW SET_SHOP_NAME STRING
                 | VIEW SET_DIMENSION NUMBER COMMA NUMBER
                 | VIEW SET_CART_ROW_SIZE NUMBER
                 | VIEW SET_CART_QUANTITY_ENABLE boolean
                 | VIEW ELEMENT_GRID_ADD path_series
     '''
-    str(p[2])
-    print((p[1], p[2], p[3]))
-    p[0] = (p[1],p[2],p[3])
+    if(p[2] == "display"):
+        UI = Ui_MainWindow()
+        UI.guiMain()
+        p[0] = p[2]
+    else:
+        str(p[2])
+        print((p[1], p[2], p[3]))
+        p[0] = (p[1],p[2],p[3])
+
+
+def p_table_to_view(p):
+    '''
+    mainviewexpr : VIEW TABLE_C STRING
+    '''
+    tm.table_to_view(p[3])
+
 
 def p_path_series(p):
     '''
@@ -317,27 +342,38 @@ def p_path_series(p):
     #print(tuple(tempList))
     p[0] = (tuple(tempList))
 
+
+
 # Table Parsing
 def p_createTable(p):
     '''
-    tableExp : TABLE_C column
+    tableExp : TABLE_C STRING column
     '''
-    print((p[1], p[2]))
-    p[0] = (p[1], p[2])
+    #print((p[1], p[2]))
+    p[0] = (p[2], p[3])
+    tm.create_table(p[0])
 
 
 def p_addRowToTable(p):
     '''
-    tableExp : TABLE_R column
+    tableExp : TABLE_R STRING column
     '''
-    print((p[1], p[2]))
-    p[0] = (p[1], p[2])
+    #print((p[1], p[2]))
+    p[0] = (p[2], p[3])
+    tm.add_row(p[0])
 
+def p_showTable (p):
+    '''
+    tableExp : TABLE_C STRING
+    '''
+    tm.show_table(p[2])
+    print(p[2])
+    p[0] = (p[1], p[2])
 
 def p_Column(p):
     '''
-    column : STRING
-            | STRING COMMA column
+    column : id
+            | id COMMA column
     '''
     tempList = []
     for thing in p:
@@ -383,6 +419,7 @@ def p_empty(p):
 def p_error(p):
     print("Syntax error found!")
 
+
 parser = yacc.yacc()
 
 # TESTING Lexer
@@ -396,6 +433,7 @@ parser = yacc.yacc()
 
 # TESTING Parser
 
+
 def run(p):
     if type(p) == tuple:
         if p[0] == '+':
@@ -406,14 +444,13 @@ def run(p):
             return run(p[1]) * run(p[2])
         elif p[0] == '/':
             return run(p[1]) / run(p[2])
-        elif p[0] == 'table' :
-            return print("funciono")
     else:
         return p
+
 
 while True:
     try:
         s = input('>> ')
     except EOFError:  # ctr + D
-        break
+        pass
     parser.parse(s)
