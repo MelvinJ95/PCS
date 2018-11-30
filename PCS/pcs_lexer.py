@@ -304,6 +304,8 @@ def p_receiptexpr_append(p):
     p[0] = (p[1],p[2],p[3],p[4],p[5])
 
 # Main View
+ui = Ui_MainWindow()
+
 def p_mainviewexp(p) :
     '''
     mainviewexpr : VIEW STRING
@@ -313,9 +315,8 @@ def p_mainviewexp(p) :
                 | VIEW SET_CART_QUANTITY_ENABLE boolean
                 | VIEW ELEMENT_GRID_ADD path_series
     '''
-    if(p[2] == "display"):
-        UI = Ui_MainWindow()
-        UI.guiMain()
+    if(p[2] == "gui"):
+        ui.guiMain()
         p[0] = p[2]
     else:
         str(p[2])
@@ -323,11 +324,11 @@ def p_mainviewexp(p) :
         p[0] = (p[1],p[2],p[3])
 
 
-def p_table_to_view(p):
-    '''
-    mainviewexpr : VIEW TABLE_C STRING
-    '''
-    tm.table_to_view(p[3])
+# def p_table_to_view(p):
+#     '''
+#     mainviewexpr : VIEW TABLE_C STRING
+#     '''
+#     tm.table_to_view(ui, p[3])
 
 
 def p_path_series(p):
@@ -360,7 +361,7 @@ def p_addRowToTable(p):
     '''
     #print((p[1], p[2]))
     p[0] = (p[2], p[3])
-    tm.add_row(p[0])
+    tm.add_row(ui, p[0])
 
 def p_showTable (p):
     '''
@@ -448,9 +449,9 @@ def run(p):
         return p
 
 
-while True:
-    try:
-        s = input('>> ')
-    except EOFError:  # ctr + D
-        pass
-    parser.parse(s)
+# while True:
+#     try:
+#         s = input('>> ')
+#     except EOFError:  # ctr + D
+#         pass
+#     parser.parse(s)
