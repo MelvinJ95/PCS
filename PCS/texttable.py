@@ -696,7 +696,7 @@ class Texttable:
         return line_wrapped
 
     def get_rows(self):
-        print("in progres")
+        print(rows)
 
 if __name__ == '__main__':
     table = Texttable()

@@ -1,6 +1,4 @@
 from typing import List, Any
-from store_item import store_item
-from main_view import Ui_MainWindow
 
 # Date	Item Name	Item Type	Quantity	Item Price	Sale Total
 import texttable as ttable
@@ -44,7 +42,6 @@ itemsTable.add_row(["rice.jpg", "rice", "food", 5.14])
 itemsTable.add_row(["coke.jpg", "coke", "food", 1.00])
 itemsTable.add_row(["papa.png", "papa", "food", 1.15])
 
-print("juan")
 
 def break_tuple_3(tuplo):
     if len(tuplo) == 3 and tuplo[2] is not None:

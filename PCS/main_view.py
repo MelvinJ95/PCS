@@ -228,22 +228,23 @@ class Ui_MainWindow(object):
         #adding to cart EVENT
 
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
+    def guiMain(self):
+        import sys
+        app = QtWidgets.QApplication(sys.argv)
+        MainWindow = QtWidgets.QMainWindow()
+        ui = Ui_MainWindow()
+        ui.setupUi(MainWindow)
 
-    #Adding items
-    item = store_item.makeItem("jamonilla.jpg", "jamonilla", "food", 2.15)
-    ui.addElement(item)
-    item = store_item.makeItem("rice.jpg", "rice", "food", 5.14)
-    ui.addElement(item)
-    item = store_item.makeItem("coke.jpg", "coke", "food", 1.00)
-    ui.addElement(item)
-    item = store_item.makeItem("papa.png", "papa", "food", 1.15)
-    ui.addElement(item)
+        #Adding items
+        item = store_item.makeItem("jamonilla.jpg", "jamonilla", "food", 2.15)
+        ui.addElement(item)
+        item = store_item.makeItem("rice.jpg", "rice", "food", 5.14)
+        ui.addElement(item)
+        item = store_item.makeItem("coke.jpg", "coke", "food", 1.00)
+        ui.addElement(item)
+        #item = store_item.makeItem("papa.png", "papa", "food", 1.15)
+        #ui.addElement(item)
 
-    MainWindow.show()
-    sys.exit(app.exec_())
+        MainWindow.show()
+        app.exec_()
+        #sys.exit(app.exec_())
