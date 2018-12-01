@@ -15,8 +15,21 @@ class Ui_MainWindow(object):
     global ui
     global app
     global MainWindow
+    global cart_list  # VARIABLE HOLDING CART ITEM
+    cart_list = []
 
-    def add_toCart(self,item):
+    def checkout(self):
+        global cart_list
+        row = ""
+        File = open("checkout.txt", "w")
+        # File.write(word)
+        for irow in range(self.cart_table.rowCount() - 1):
+            item = self.cart_table.item(irow, 0).text()
+            price = self.cart_table.item(irow, 1).text()
+            File.write((item + " " + price) + "\n")
+        File.close()
+
+    def add_toCart(self, item):
         item_to_send = item.data(QtCore.Qt.UserRole)
         print(str(item.data(QtCore.Qt.UserRole)))
         FT.function().addtoCart(self, item_to_send)
@@ -24,10 +37,36 @@ class Ui_MainWindow(object):
     def report(self):
         FT.function().report()
 
+    def delete_fromCart(self):
+        global cart_list
+        try:
+            index = self.cart_table.currentRow()
+            item_to_delete = self.cart_table.item(index, 0).text()
+            # print(("item to del %s",item_to_delete))
+            # cart_list.remove((item_to_delete))
+            for i in range(0, self.cart_table.rowCount() - 1):  # DELETE FROM LIST TOO
+                # print(i)
+                # print(self.cart_table.rowCount())
+                # print(cart_list[i].name)
+                if (cart_list[i].name == item_to_delete):
+                    #   print("popping %s", cart_list[i].name)
+                    cart_list.pop(i)
+                    break
+
+            FT.function().deleteItem(index + 1)
+
+        except:
+            # print("Oops! Selected Wrong Item")
+            pass
+
+    # print('after popping list is:')
+    # for i in range(0,len(cart_list)):
+    #   print(cart_list[i].name)
+
     def addElement(self, sitem):
         item = QtWidgets.QListWidgetItem()
         item.setData(QtCore.Qt.UserRole, sitem)
-        item.setTextAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignVCenter)
+        item.setTextAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignVCenter)
         font = QtGui.QFont()
         font.setPointSize(7)
         item.setFont(font)
@@ -40,7 +79,7 @@ class Ui_MainWindow(object):
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.NoBrush)
         item.setForeground(brush)
-        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+        item.setFlags(QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
         self.elements_grid.addItem(item)
 
         # element_index = element_index + 1
@@ -176,7 +215,7 @@ class Ui_MainWindow(object):
         self.elements_grid.setCurrentRow(-1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        #initializing element index
+        # initializing element index
         # element_index = 0
 
     def retranslateUi(self, MainWindow):
@@ -217,18 +256,20 @@ class Ui_MainWindow(object):
         self.total_table.setSortingEnabled(__sortingEnabled)
         self.check_out_button_2.setText(_translate("MainWindow", "Report"))
 
-        #ITEM EVENT ACTION
+        # ITEM EVENT ACTION
         self.elements_grid.itemClicked.connect(self.add_toCart)
-        #USER CANT EDIT ITEM/COST HEADERS
+        self.cart_table.doubleClicked.connect(self.delete_fromCart)
+
+        # USER CANT EDIT ITEM/COST HEADERS
         self.cart_table.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
-        #BUTTON EVENTS
+        # BUTTON EVENTS
+        self.check_out_button.clicked.connect(self.checkout)
         self.check_out_button_2.clicked.connect(self.report)
 
-        #Give function an Instance of Main Window to have access to UI Elements 
+        # Give function an Instance of Main Window to have access to UI Elements
         FT.function().returnObj(self)
 
-        #adding to cart EVENT
 
 
     def guiMain(self):
@@ -241,19 +282,19 @@ class Ui_MainWindow(object):
         # ui = Ui_MainWindow()
         self.setupUi(MainWindow)
 
-        #Adding items
+        # Adding items
         item = store_item.makeItem("jamonilla.jpg", "jamonilla", "food", 2.15)
         self.addElement(item)
         item = store_item.makeItem("rice.jpg", "rice", "food", 5.14)
         self.addElement(item)
         item = store_item.makeItem("coke.jpg", "coke", "food", 1.00)
         self.addElement(item)
-        #item = store_item.makeItem("papa.png", "papa", "food", 1.15)
-        #ui.addElement(item)
+        # item = store_item.makeItem("papa.png", "papa", "food", 1.15)
+        # ui.addElement(item)
 
-        #MainWindow.show()
-        #app.exec_()
-        #sys.exit(app.exec_())
+        # MainWindow.show()
+        # app.exec_()
+        # sys.exit(app.exec_())
 
     def show_main_window(self):
         MainWindow.show()
@@ -267,3 +308,4 @@ class Ui_MainWindow(object):
         self.addElement(item)
         MainWindow.show()
         app.exec_()
+
