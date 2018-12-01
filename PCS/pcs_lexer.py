@@ -305,6 +305,7 @@ def p_receiptexpr_append(p):
 
 # Main View
 ui = Ui_MainWindow()
+ui.guiMain()
 
 def p_mainviewexp(p) :
     '''
@@ -316,7 +317,7 @@ def p_mainviewexp(p) :
                 | VIEW ELEMENT_GRID_ADD path_series
     '''
     if(p[2] == "gui"):
-        ui.guiMain()
+        ui.show_main_window()
         p[0] = p[2]
     else:
         str(p[2])
@@ -324,11 +325,11 @@ def p_mainviewexp(p) :
         p[0] = (p[1],p[2],p[3])
 
 
-# def p_table_to_view(p):
-#     '''
-#     mainviewexpr : VIEW TABLE_C STRING
-#     '''
-#     tm.table_to_view(ui, p[3])
+def p_table_to_view(p):
+    '''
+    mainviewexpr : VIEW TABLE_C STRING
+    '''
+    ui.table_to_view(tm.table_to_view(p[3]))
 
 
 def p_path_series(p):

@@ -2,6 +2,7 @@ from typing import List, Any
 
 # Date	Item Name	Item Type	Quantity	Item Price	Sale Total
 import texttable as ttable
+import main_view as mv
 
 def test():
     tab = ttable.Texttable()
@@ -99,9 +100,9 @@ def show_table(name):
     elif (name == rKey):
         print(reportTable.draw())
 
-def table_to_view(ui, name):
+def table_to_view(name):
     print(name)
-    # mv.add_item(ui, "jamonilla.jpg", "jamonilla", "food", 2.15)
+    return "papa.png", "papa", "food", 1.15
     # item = store_item.makeItem("jamonilla.jpg", "jamonilla", "food", 2.15)
     # ui.addElement(item)
     # item = store_item.makeItem("rice.jpg", "rice", "food", 5.14)

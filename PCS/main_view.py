@@ -12,6 +12,9 @@ from store_item import store_item
 
 class Ui_MainWindow(object):
     global element_index
+    global ui
+    global app
+    global MainWindow
 
     def add_toCart(self,item):
         item_to_send = item.data(QtCore.Qt.UserRole)
@@ -230,21 +233,37 @@ class Ui_MainWindow(object):
 
     def guiMain(self):
         import sys
+        global app
+        global ui
+        global MainWindow
         app = QtWidgets.QApplication(sys.argv)
         MainWindow = QtWidgets.QMainWindow()
-        ui = Ui_MainWindow()
-        ui.setupUi(MainWindow)
+        # ui = Ui_MainWindow()
+        self.setupUi(MainWindow)
 
         #Adding items
         item = store_item.makeItem("jamonilla.jpg", "jamonilla", "food", 2.15)
-        ui.addElement(item)
+        self.addElement(item)
         item = store_item.makeItem("rice.jpg", "rice", "food", 5.14)
-        ui.addElement(item)
+        self.addElement(item)
         item = store_item.makeItem("coke.jpg", "coke", "food", 1.00)
-        ui.addElement(item)
+        self.addElement(item)
         #item = store_item.makeItem("papa.png", "papa", "food", 1.15)
         #ui.addElement(item)
 
+        #MainWindow.show()
+        #app.exec_()
+        #sys.exit(app.exec_())
+
+    def show_main_window(self):
         MainWindow.show()
         app.exec_()
-        #sys.exit(app.exec_())
+
+    def table_to_view(self, input):
+        global app
+        global ui
+        print("entro a table view")
+        item = store_item.makeItem(input[0], input[0], input[0], input[0])
+        self.addElement(item)
+        MainWindow.show()
+        app.exec_()
