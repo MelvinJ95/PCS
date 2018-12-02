@@ -9,6 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import functions as FT
 from store_item import store_item
+import os.path as path
 
 class Ui_MainWindow(object):
     global element_index
@@ -24,7 +25,7 @@ class Ui_MainWindow(object):
     def report(self):
         FT.function().report()
 
-    def addElement(self, sitem):
+    def addElement1(self, sitem):
         item = QtWidgets.QListWidgetItem()
         item.setData(QtCore.Qt.UserRole, sitem)
         item.setTextAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignVCenter)
@@ -44,6 +45,32 @@ class Ui_MainWindow(object):
         self.elements_grid.addItem(item)
 
         # element_index = element_index + 1
+
+    def addElement(self, sitem):
+        isP = path.isfile(sitem.icon)
+
+        if isP:
+            print("file = " + str(isP))
+            item = QtWidgets.QListWidgetItem()
+            item.setData(QtCore.Qt.UserRole, sitem)
+            item.setTextAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignVCenter)
+            font = QtGui.QFont()
+            font.setPointSize(7)
+            item.setFont(font)
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap(sitem.icon), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            item.setIcon(icon)
+            brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+            brush.setStyle(QtCore.Qt.NoBrush)
+            item.setBackground(brush)
+            brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+            brush.setStyle(QtCore.Qt.NoBrush)
+            item.setForeground(brush)
+            item.setFlags(QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsUserCheckable |
+                          QtCore.Qt.ItemIsEnabled)
+            self.elements_grid.addItem(item)
+        else:
+            raise FileNotFoundError("Image not found!!")
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -255,15 +282,33 @@ class Ui_MainWindow(object):
         #app.exec_()
         #sys.exit(app.exec_())
 
+
+    def set_shop_name(self, name):
+        self.shop_name_label.setText(name)
+
+
     def show_main_window(self):
         MainWindow.show()
         app.exec_()
 
-    def table_to_view(self, input):
+    def add_item(self, input, imgtype):
         global app
         global ui
         print("entro a table view")
-        item = store_item.makeItem(input[0], input[0], input[0], input[0])
+        print(input)
+        print(input[0]+imgtype)
+        # try:
+        item = store_item.makeItem(input[0] + imgtype, input[1], input[2], input[3])
         self.addElement(item)
         MainWindow.show()
         app.exec_()
+        # except (FileNotFoundError, IOError):
+        #     try:
+        #         item = store_item.makeItem(input[0] + imgtype, input[1], input[2], input[3])
+        #         print(".. Searching .jpg image.")
+        #         self.addElement(item)
+        #         MainWindow.show()
+        #         app.exec_()
+        #     except (FileNotFoundError, IOError):
+        #         print(" * Image not found * ")
+

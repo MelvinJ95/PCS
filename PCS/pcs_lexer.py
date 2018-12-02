@@ -30,7 +30,6 @@ tokens = [
     'STRING',
     'TABLE_C',
     'TABLE_R',
-    'COLUMN',
     'COMMA',
     'PATHNAME',
     'HEAD',
@@ -45,7 +44,7 @@ tokens = [
     'SET_DIMENSION',
     'SET_CART_ROW_SIZE',
     'SET_CART_QUANTITY_ENABLE',
-    'ELEMENT_GRID_ADD',
+    'ADD_ITEM',
     'item_type_enable',
     'item_enable',
     'EXIT'
@@ -63,16 +62,18 @@ t_EQUALS = r'\='
 t_COMMA = r'\,'
 t_PERIOD = r'\.'
 
+
 # A regular expression rule with some action code
-def t_NUMBER(t):
-    r'\d+'
-    t.value = int(t.value)
+def t_FLOAT(t):
+    # same as ..
+    r'[0-9]+\.[0-9]+'
+    t.value = float(t.value)
     return t
 
 
-def t_FLOAT(t):
-    r'\d+\.\d'
-    t.value = float(t.value)
+def t_NUMBER(t):
+    r'\d+'
+    t.value = int(t.value)
     return t
 
 
@@ -125,8 +126,8 @@ def t_SET_CART_QUANTITY_ENABLE(t):
     return t
 
 
-def t_ELEMENT_GRID_ADD(t):
-    r'element_grid_add'
+def t_ADD_ITEM(t):
+    r'add_item'
     return t
 
 
@@ -225,33 +226,45 @@ precedence = (
 
 )
 
-# def t_column
 
-
-def p_calc(p):
+def p_expr(p):
     '''
-    calc : expression
+    expr : expression
+         | item_details
          | tableExp
          | pathexpr
          | receiptexpr
          | mainviewexpr
          | reportexpr
          | empty
+         | EXIT
     '''
-    print(run(p[1]))
+    if p[1] == "exit":
+        exit(0)
+    if p[1] is not None:
+        print("doing math expression")
+        print(run(p[1]))
+    else: None
+        # print(" to be attended ")
+    # print("2) ", run(p[1]))
+
 
 def p_id(p):
     '''
     id : FLOAT
+        | NUMBER
         | STRING
     '''
+    print("doing a float or string for id")
     p[0] = p[1]
+
 
 def p_boolean(p):
     '''
     boolean : TRUE
             | FALSE
     '''
+    print("doing a boolean")
     p[0] = p[1]
 
 
@@ -267,10 +280,12 @@ def p_expression(p):
 
 def p_expression_int_float(p):
     '''
-    expression : NUMBER
-               | FLOAT
+    expression : FLOAT
+               | NUMBER
     '''
+    print("this is float or int expression\n", p[1])
     p[0] = p[1]
+    print("this is float or int expression\n", p[1])
 
 # Path Parsing
 def p_pathexpr(p):
@@ -310,19 +325,40 @@ ui.guiMain()
 def p_mainviewexp(p) :
     '''
     mainviewexpr : VIEW STRING
+                | VIEW ADD_ITEM item_details
                 | VIEW SET_SHOP_NAME STRING
                 | VIEW SET_DIMENSION NUMBER COMMA NUMBER
                 | VIEW SET_CART_ROW_SIZE NUMBER
                 | VIEW SET_CART_QUANTITY_ENABLE boolean
-                | VIEW ELEMENT_GRID_ADD path_series
     '''
-    if(p[2] == "gui"):
-        ui.show_main_window()
-        p[0] = p[2]
+    # view add_item papa, papa1, foo, 1.23
+    if len(p) < 4:
+        if p[2] == "shop":
+            ui.show_main_window()
+            p[0] = p[2]
+        else:
+            print("Expected [ view shop ] but instead found [ view ", p[2], "]")
+            p_error(p)
     else:
-        str(p[2])
-        print((p[1], p[2], p[3]))
-        p[0] = (p[1],p[2],p[3])
+        print("-", p[1], "-", p[2], "-", p[3])
+        if p[2] == "add_item":
+            print(".. Adding item to items table")
+            tm.add_item(ui, "items", p[3])
+            # ui.table_to_view(p[3])
+        elif p[2] == "set_shop_name":
+            print(".. Setting shop named to:", p[3])
+            ui.set_shop_name(p[3])
+        else:
+            # str(p[2])
+            print((p[1], p[2], p[3]))
+            p[0] = (p[1], p[2], p[3])
+
+
+def p_item_details(p):
+    '''
+    item_details : STRING COMMA STRING COMMA STRING COMMA FLOAT
+    '''
+    p[0] = (p[1], p[3], p[5], p[7])
 
 
 def p_table_to_view(p):
@@ -332,18 +368,17 @@ def p_table_to_view(p):
     ui.table_to_view(tm.table_to_view(p[3]))
 
 
-def p_path_series(p):
-    '''
-    path_series : STRING
-                | STRING DIVIDE STRING
-    '''
-    tempList = []
-    for thing in p:
-        if thing != None:
-            tempList.append(thing)
-    #print(tuple(tempList))
-    p[0] = (tuple(tempList))
-
+# def p_path_series(p):
+#     '''
+#     path_series : STRING
+#                 | STRING DIVIDE STRING
+#     '''
+#     tempList = []
+#     for thing in p:
+#         if thing != None:
+#             tempList.append(thing)
+#     #print(tuple(tempList))
+#     p[0] = (tuple(tempList))
 
 
 # Table Parsing
@@ -351,7 +386,8 @@ def p_createTable(p):
     '''
     tableExp : TABLE_C STRING column
     '''
-    #print((p[1], p[2]))
+    # table items uno, dos, tres, cuatro
+    # print((p[1], p[2]))
     p[0] = (p[2], p[3])
     tm.create_table(p[0])
 
@@ -360,7 +396,8 @@ def p_addRowToTable(p):
     '''
     tableExp : TABLE_R STRING column
     '''
-    #print((p[1], p[2]))
+    # addRow items jamonilla, dos, tres, 1.2
+    # print((p[1], p[2]))
     p[0] = (p[2], p[3])
     tm.add_row(ui, p[0])
 
@@ -372,7 +409,8 @@ def p_showTable (p):
     print(p[2])
     p[0] = (p[1], p[2])
 
-def p_Column(p):
+
+def p_column(p):
     '''
     column : id
             | id COMMA column
@@ -384,7 +422,7 @@ def p_Column(p):
     #print(tuple(tempList))
     p[0] = (tuple(tempList))
 
-#report create view functions
+# report create view functions
 
 # def p_use_boolean(p):
 #     '''
@@ -392,7 +430,7 @@ def p_Column(p):
 #     '''
 #     p[0] = p[1]
 
-#reportCV_expression
+# reportCV_expression
 def p_report_create_view(p):
     '''
     reportexpr : item_type_enable boolean
@@ -404,11 +442,11 @@ def p_report_create_view(p):
     # p[0] = p[1]
 
 
-def p_exit(p):
-    '''
-    expression : EXIT
-    '''
-    exit(0)
+# def p_exit(p):
+#     '''
+#     expression : EXIT
+#     '''
+#     exit(0)
 
 
 def p_empty(p):

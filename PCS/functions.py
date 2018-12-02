@@ -11,11 +11,11 @@ class function(object):
     global Ui_MainWindow
     global Ui_Form
 
-    def returnObj(self,object): #COPY OF MAIN VIEW INSTANCE
-        global Ui_MainWindow #Declared again to edit value
+    def returnObj(self,object): # COPY OF MAIN VIEW INSTANCE
+        global Ui_MainWindow # Declared again to edit value
         Ui_MainWindow = object
 
-    def return_receipt(self,object):
+    def return_receipt(self, object):
         global Ui_Form
         Ui_Form = object
 

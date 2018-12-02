@@ -28,15 +28,15 @@ def test():
 
 #test()
 
-itemsTable = ttable.Texttable() #primer valor es el icono
+itemsTable = ttable.Texttable() # primer valor es el icono
 reportTable = ttable.Texttable()
 
 iKey = "items"
 rKey = "report"
 
-tempList: List[Any] = []
+tempList = []
 
-#for testing purposes and demonstration
+# for testing purposes and demonstration
 itemsTable.header(["file path","article name","type","price"])
 itemsTable.add_row(["jamonilla.jpg", "jamonilla", "food", 2.15])
 itemsTable.add_row(["rice.jpg", "rice", "food", 5.14])
@@ -51,64 +51,69 @@ def break_tuple_3(tuplo):
     else:
         tempList.append(tuplo[0])
 
+
 def create_table(table_head):
-    #print(table_head)
-    if(table_head[0] == iKey):
+    if table_head[0] == iKey:
         break_tuple_3(table_head[1])
-
-        #print(tempHead)
-
         itemsTable.header(tempList)
         print(itemsTable.draw())
 
-    elif(table_head[0] == rKey):
+    elif table_head[0] == rKey:
         break_tuple_3(table_head[1])
-
-        #print(tempHead)
-
         reportTable.header(tempList)
         print(reportTable.draw())
 
-#table items uno, dos
-#addRow items one, two
+# table items uno, dos
+# addRow items one, two
 
 
-def add_row(ui, table_head):
-    #print(table_head)
-    tempList.clear()
-    if(table_head[0] == iKey):
-        break_tuple_3(table_head[1])
+def add_item(ui, table_name, table_row):
+    # tempList.clear()
+    print("    dalsdfi   ".strip())
+    print("inside add_row: tname-", table_name.strip(), "trow-", table_row)
+    print("1) inside add_row: tname-", table_name.strip())
+    if table_name.strip() == iKey:
+        try:
+            ui.add_item(table_row, ".png")
+            print(".. Searching .png image.")
+        except FileNotFoundError:
+            try:
+                ui.add_item(table_row, ".jpg")
+                print(".. Searching .jpg image.")
+            except FileNotFoundError:
+                print(" * Image not found * ")
 
-        #print(tempHead)
-
-        itemsTable.add_row(tempList)
-        #item = store_item.makeItem("jamonilla.jpg", "jamonilla", "food", 2.15)
-        #ui.addElement(item)
-        ui.add_item()
+        print("2) inside add_row: tname-", table_name.strip())
+        itemsTable.add_row(table_row)
         print(itemsTable.draw())
-    elif (table_head[0] == rKey):
-        break_tuple_3(table_head[1])
+    elif table_name.strip() == rKey:
+        reportTable.add_row(table_row)
+        print(reportTable.draw())
 
-        # print(tempHead)
 
+def add_row(ui, table_row):
+    tempList.clear()
+    if table_row[0] == iKey:
+        break_tuple_3(table_row[1])
+        try:
+            ui.add_item(tempList, ".png")
+            print(".. Searching .png image.")
+        except FileNotFoundError:
+            try:
+                ui.add_item(tempList, ".jpg")
+                print(".. Searching .jpg image.")
+            except FileNotFoundError:
+                print(" * Image not found * ")
+        itemsTable.add_row(tempList)
+        print(itemsTable.draw())
+    elif table_row[0] == rKey:
+        break_tuple_3(table_row[1])
         reportTable.add_row(tempList)
         print(reportTable.draw())
 
-def show_table(name):
-    if (name == iKey):
+
+def show_table(table_name):
+    if table_name == iKey:
         print(itemsTable.draw())
-    elif (name == rKey):
+    elif table_name == rKey:
         print(reportTable.draw())
-
-def table_to_view(name):
-    print(name)
-    return "papa.png", "papa", "food", 1.15
-    # item = store_item.makeItem("jamonilla.jpg", "jamonilla", "food", 2.15)
-    # ui.addElement(item)
-    # item = store_item.makeItem("rice.jpg", "rice", "food", 5.14)
-    # ui.addElement(item)
-    # item = store_item.makeItem("coke.jpg", "coke", "food", 1.00)
-    # ui.addElement(item)
-    # item = store_item.makeItem("papa.png", "papa", "food", 1.15)
-    # ui.addElement(item)
-
