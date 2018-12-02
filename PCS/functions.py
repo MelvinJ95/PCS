@@ -1,15 +1,19 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from report_view import Ui_report_view
-#from main_view import Ui_MainWindow
+<<<<<<< HEAD
+# from main_view import Ui_MainWindow
+=======
+>>>>>>> e6e3c552e4f1f2f5bbdb67b94c49c533d76c28e6
 from create_report_view import Ui_reportCreateView as RCV
-from receipt_view import Ui_Form
+from receipt_view import Ui_Form as RV
 # from store_item import store_item
 
-total_cost = 0
 
+total_cost = 0
 class function(object):
     global Ui_MainWindow
     global Ui_Form
+    global total_cost
 
     def returnObj(self,object): # COPY OF MAIN VIEW INSTANCE
         global Ui_MainWindow # Declared again to edit value
@@ -21,23 +25,25 @@ class function(object):
 
     def addtoCart(self, object, item):
         global total_cost  #Declared again to edit value
+
         rowCount = Ui_MainWindow.cart_table.rowCount()
         Ui_MainWindow.cart_table.insertRow(rowCount)
         rowCount -= 1
         Ui_MainWindow.cart_table.setItem(rowCount, 0, QtWidgets.QTableWidgetItem(item.name))
         Ui_MainWindow.cart_table.setItem(rowCount, 1, QtWidgets.QTableWidgetItem(str(item.price)))
-        Ui_MainWindow.cart_table.item(rowCount, 1).setTextAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
+        #Ui_MainWindow.cart_table.item(rowCount, 1).setTextAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
         # rowCount = rowCount + 1
-        total_cost += item.price   #TO BE EDITED 
+        total_cost += item.price   #TO BE EDITED
         Ui_MainWindow.total_table.setItem(0, 1, QtWidgets.QTableWidgetItem(str(round(total_cost, 2))))
-        Ui_MainWindow.total_table.item(0, 1).setTextAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
+       # Ui_MainWindow.total_table.item(0, 1).setTextAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
         # Ui_MainWindow.total_table.setItem(main_view.total_table.rowCount()-1, 1, QtWidgets.QTableWidgetItem(total_cost)) REMOVE COMMENT ONCED TOTAL COST IS DEFINED
 
 
     def deleteItem(self,row):
         global total_cost
-        item_cost = Ui_MainWindow.cart_table.itemAt(row-1,1)
-        #total_cost = total_cost - str(item_cost)
+        item_cost = Ui_MainWindow.cart_table.item(row-1,1).text()
+        total_cost = total_cost - float(item_cost)
+        Ui_MainWindow.total_table.setItem(0, 1, QtWidgets.QTableWidgetItem(str(round(total_cost, 2))))
         # main_view.total_table.setItem(main_view.total_table.rowCount()-1, 1, QtWidgets.QTableWidgetItem(total_cost)) REMOVE COMMENT ONCED TOTAL COST IS DEFINED
 
         Ui_MainWindow.cart_table.removeRow(row-1)
@@ -45,6 +51,12 @@ class function(object):
     def report(self):
         Ui_MainWindow.window = QtWidgets.QMainWindow()
         Ui_MainWindow.ui = RCV()
+        Ui_MainWindow.ui.setupUi(Ui_MainWindow.window)
+        Ui_MainWindow.window.show()
+
+    def receipt(self):
+        Ui_MainWindow.window = QtWidgets.QMainWindow()
+        Ui_MainWindow.ui = RV()
         Ui_MainWindow.ui.setupUi(Ui_MainWindow.window)
         Ui_MainWindow.window.show()
 

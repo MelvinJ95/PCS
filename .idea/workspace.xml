@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6997224c-e9c4-4133-bdf3-8e5293e7136f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/ICOM4036.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ICOM4036.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PCS/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/PCS/functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PCS/main_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/PCS/main_view.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PCS/parser.out" beforeDir="false" afterPath="$PROJECT_DIR$/PCS/parser.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PCS/parsetab.py" beforeDir="false" afterPath="$PROJECT_DIR$/PCS/parsetab.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PCS/pcs_lexer.py" beforeDir="false" afterPath="$PROJECT_DIR$/PCS/pcs_lexer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PCS/receipt_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/PCS/receipt_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PCS/report_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/PCS/report_view.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PCS/tableManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/PCS/tableManager.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -71,8 +73,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PCS/main.py">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="326" column="11" selection-start-line="326" selection-start-column="11" selection-end-line="326" selection-end-column="11" />
             <state>
               <folding>
+                <element signature="e#0#21#0" expanded="true" />
                 <marker date="1543710885136" expanded="true" signature="37:179" ph="..." />
               </folding>
             </state>
@@ -82,6 +87,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PCS/pcs_lexer.py">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
             <state relative-caret-position="659">
               <caret line="398" column="6" lean-forward="true" selection-start-line="398" selection-start-column="6" selection-end-line="398" selection-end-column="44" />
               <folding>
@@ -98,11 +105,14 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PCS/tableManager.py">
+        <entry file="file://$PROJECT_DIR$/PCS/main_view.py">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="202">
+              <caret line="38" column="23" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="28" />
             <state relative-caret-position="676">
               <caret line="102" column="36" selection-start-line="102" selection-start-column="36" selection-end-line="102" selection-end-column="36" />
               <folding>
+                <element signature="e#198#240#0" expanded="true" />
                 <element signature="e#0#28#0" expanded="true" />
                 <marker date="1543782008195" expanded="true" signature="605:606" ph="..." />
                 <marker date="1543782008195" expanded="true" signature="1205:1210" ph="..." />
@@ -112,11 +122,16 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PCS/report_view.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1410">
+              <caret line="94" column="34" lean-forward="true" selection-start-line="94" selection-start-column="34" selection-end-line="94" selection-end-column="34" />
         <entry file="file://$PROJECT_DIR$/PCS/main_view.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="149">
               <caret line="297" column="19" selection-start-line="297" selection-start-column="19" selection-end-line="297" selection-end-column="19" />
               <folding>
+                <element signature="e#200#242#0" expanded="true" />
                 <element signature="e#198#240#0" expanded="true" />
                 <marker date="1543781895660" expanded="true" signature="1578:1587" ph="..." />
                 <marker date="1543781895660" expanded="true" signature="12469:12478" ph="..." />
@@ -136,14 +151,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PCS/functions.py">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-384">
+              <caret line="29" column="113" lean-forward="true" selection-start-line="29" selection-start-column="113" selection-end-line="57" />
             <state relative-caret-position="221">
               <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PCS/receipt_view.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="13" column="22" lean-forward="true" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -159,6 +185,17 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>p_bo</find>
+      <find>boolean</find>
+      <find>item_type_enable</find>
+      <find>PATHNAME</find>
+      <find>COLON</find>
+      <find>table_C</find>
+      <find>run</find>
+      <find>table</find>
+      <find>table_c</find>
+      <find>colu</find>
+      <find>TABLE_R</find>
       <find>additem</find>
       <find>comma</find>
       <find>receip</find>
@@ -176,6 +213,11 @@
       <find>print</find>
       <find>to be a</find>
       <find>rows</find>
+      <find>additem</find>
+      <find>Ui_MainWindow</find>
+      <find>window</find>
+      <find>ui</find>
+      <find>main_window</find>
       <find>table</find>
       <find>table_to</find>
       <find>table_to_view</find>
@@ -223,9 +265,15 @@
         <option value="$PROJECT_DIR$/PCS/texttable.py" />
         <option value="$PROJECT_DIR$/PCS/functions.py" />
         <option value="$PROJECT_DIR$/PCS/main.py" />
+        <option value="$PROJECT_DIR$/PCS/texttable.py" />
         <option value="$PROJECT_DIR$/PCS/pcs_lexer.py" />
         <option value="$PROJECT_DIR$/PCS/main_view.py" />
         <option value="$PROJECT_DIR$/PCS/tableManager.py" />
+        <option value="$PROJECT_DIR$/PCS/pcs_lexer.py" />
+        <option value="$PROJECT_DIR$/PCS/report_view.py" />
+        <option value="$PROJECT_DIR$/PCS/receipt_view.py" />
+        <option value="$PROJECT_DIR$/PCS/main_view.py" />
+        <option value="$PROJECT_DIR$/PCS/functions.py" />
       </list>
     </option>
   </component>
@@ -239,7 +287,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -252,52 +299,16 @@
               <item name="ICOM4036" type="462c0819:PsiDirectoryNode" />
               <item name="PCS" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="ICOM4036" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ICOM4036" type="462c0819:PsiDirectoryNode" />
-              <item name="PCS" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ICOM4036" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-            <path>
-              <item name="ICOM4036" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.6 (Test1) &gt;" type="70bed36:NamedLibraryElementNode" />
-            </path>
-            <path>
-              <item name="ICOM4036" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.6 (Test1) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="python-skeletons" type="51189727:PyUserSkeletonsNode" />
-            </path>
-            <path>
-              <item name="ICOM4036" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.6 (Test1) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="Python36" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ICOM4036" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.6 (Test1) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="DLLs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ICOM4036" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.6 (Test1) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="Lib" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Test/venv" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Logically-master" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -471,14 +482,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
+    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
     <frame x="-7" y="-7" width="1488" height="878" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1605789" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16048035" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49929875" visible="true" weight="0.32885906" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49929875" visible="true" weight="0.32810867" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39891452" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -491,9 +503,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fixed &gt; view element_grid_add" />
@@ -514,39 +523,67 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../Test1/venv/Lib/site-packages/ply/yacc.py" />
+    <entry file="file://$PROJECT_DIR$/../Test1/venv/Lib/site-packages/ply/lex.py" />
+    <entry file="file://$PROJECT_DIR$/PCS/functions.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PCS/texttable.py">
     <entry file="file://$PROJECT_DIR$/PCS/functions.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/../Test1/venv/Lib/site-packages/ply/lex.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10455">
+          <caret line="697" column="23" lean-forward="true" selection-start-line="697" selection-start-column="23" selection-end-line="697" selection-end-column="23" />
         <state relative-caret-position="175">
           <caret line="362" selection-start-line="362" selection-end-line="362" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PCS/tableManager.py">
     <entry file="file://$PROJECT_DIR$/../Test1/venv/Lib/site-packages/ply/yacc.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="13" lean-forward="true" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         <state relative-caret-position="418">
           <caret line="242" selection-start-line="242" selection-end-line="242" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PCS/pcs_lexer.py">
     <entry file="file://$PROJECT_DIR$/PCS/texttable.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="326" column="11" selection-start-line="326" selection-start-column="11" selection-end-line="326" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
         <state relative-caret-position="140">
           <caret line="506" selection-start-line="506" selection-end-line="506" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PCS/store_item.py">
+    <entry file="file://$PROJECT_DIR$/PCS/main.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
         <state relative-caret-position="68">
           <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PCS/main_view.py">
     <entry file="file://$PROJECT_DIR$/PCS/functions.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="38" column="23" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="28" />
+          <folding>
+            <element signature="e#198#240#0" expanded="true" />
+          </folding>
         <state relative-caret-position="221">
           <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
           <folding>
@@ -555,8 +592,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PCS/main.py">
+    <entry file="file://$PROJECT_DIR$/PCS/store_item.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="41" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="41" />
         <state>
           <folding>
             <marker date="1543710885136" expanded="true" signature="37:179" ph="..." />
@@ -564,8 +603,11 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PCS/receipt_view.py">
     <entry file="file://$PROJECT_DIR$/PCS/main_view.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="13" column="22" lean-forward="true" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
         <state relative-caret-position="149">
           <caret line="297" column="19" selection-start-line="297" selection-start-column="19" selection-end-line="297" selection-end-column="19" />
           <folding>
@@ -578,11 +620,15 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PCS/report_view.py">
     <entry file="file://$PROJECT_DIR$/PCS/tableManager.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1410">
+          <caret line="94" column="34" lean-forward="true" selection-start-line="94" selection-start-column="34" selection-end-line="94" selection-end-column="34" />
         <state relative-caret-position="676">
           <caret line="102" column="36" selection-start-line="102" selection-start-column="36" selection-end-line="102" selection-end-column="36" />
           <folding>
+            <element signature="e#200#242#0" expanded="true" />
             <element signature="e#0#28#0" expanded="true" />
             <marker date="1543782008195" expanded="true" signature="605:606" ph="..." />
             <marker date="1543782008195" expanded="true" signature="1205:1210" ph="..." />
@@ -590,11 +636,15 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PCS/functions.py">
     <entry file="file://$PROJECT_DIR$/PCS/pcs_lexer.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-384">
+          <caret line="29" column="113" lean-forward="true" selection-start-line="29" selection-start-column="113" selection-end-line="57" />
         <state relative-caret-position="659">
           <caret line="398" column="6" lean-forward="true" selection-start-line="398" selection-start-column="6" selection-end-line="398" selection-end-column="44" />
           <folding>
+            <element signature="e#0#42#0" expanded="true" />
             <element signature="e#0#21#0" expanded="true" />
             <marker date="1543774628968" expanded="true" signature="3702:3707" ph="..." />
             <marker date="1543774628968" expanded="true" signature="3702:3830" ph="..." />
