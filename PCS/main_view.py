@@ -28,6 +28,7 @@ class Ui_MainWindow(object):
             price = self.cart_table.item(irow, 1).text()
             File.write((item + " " + price) + "\n")
         File.close()
+        FT.function().receipt()
 
     def add_toCart(self, item):
         item_to_send = item.data(QtCore.Qt.UserRole)

@@ -1,8 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from report_view import Ui_report_view
-from main_view import Ui_MainWindow
 from create_report_view import Ui_reportCreateView as RCV
-from receipt_view import Ui_Form
+from receipt_view import Ui_Form as RV
 # from store_item import store_item
 
 
@@ -48,6 +47,12 @@ class function(object):
     def report(self):
         Ui_MainWindow.window = QtWidgets.QMainWindow()
         Ui_MainWindow.ui = RCV()
+        Ui_MainWindow.ui.setupUi(Ui_MainWindow.window)
+        Ui_MainWindow.window.show()
+
+    def receipt(self):
+        Ui_MainWindow.window = QtWidgets.QMainWindow()
+        Ui_MainWindow.ui = RV()
         Ui_MainWindow.ui.setupUi(Ui_MainWindow.window)
         Ui_MainWindow.window.show()
 

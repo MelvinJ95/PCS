@@ -1,9 +1,19 @@
 import ply.lex as lex
 import ply.yacc as yacc
 from main_view import Ui_MainWindow
+
 import tableManager as tm
 from PyQt5 import QtCore, QtGui, QtWidgets
 from store_item import store_item
+
+# Object initializations
+
+# Main View
+ui = Ui_MainWindow()
+ui.guiMain()
+
+# Receipt View
+
 
 # -- Lexer --
 
@@ -303,9 +313,6 @@ def p_receiptexpr_append(p):
     print((p[1],p[2],p[3],p[4],p[5]))
     p[0] = (p[1],p[2],p[3],p[4],p[5])
 
-# Main View
-ui = Ui_MainWindow()
-ui.guiMain()
 
 def p_mainviewexp(p) :
     '''

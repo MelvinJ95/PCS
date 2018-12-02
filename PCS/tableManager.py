@@ -34,7 +34,7 @@ reportTable = ttable.Texttable()
 iKey = "items"
 rKey = "report"
 
-tempList: List[Any] = []
+tempList = []
 
 #for testing purposes and demonstration
 itemsTable.header(["file path","article name","type","price"])
