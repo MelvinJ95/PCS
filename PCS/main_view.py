@@ -258,9 +258,8 @@ class Ui_MainWindow(object):
 
         # ITEM EVENT ACTION
         self.elements_grid.itemClicked.connect(self.add_toCart)
-        self.cart_table.doubleClicked.connect(self.delete_fromCart)
-
-        # USER CANT EDIT ITEM/COST HEADERS
+        
+        #USER CANT EDIT ITEM/COST HEADERS
         self.cart_table.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
         # BUTTON EVENTS
