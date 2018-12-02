@@ -88,12 +88,12 @@ class Ui_report_view(object):
         self.close_button.setText(_translate("report_view", "Close"))
 
 
-# if __name__ == '__main__':
-#     import sys
+    # if __name__ == '__main__':
+    #     import sys
 
-#     app = QtWidgets.QApplication(sys.argv)
-#     report_view = QtWidgets.QWidget()
-#     ui = Ui_report_view()
-#     ui.setupUi(report_view)
-#     report_view.show()
-#     sys.exit(app.exec_())
+    #     app = QtWidgets.QApplication(sys.argv)
+    #     report_view = QtWidgets.QWidget()
+    #     ui = Ui_report_view()
+    #     ui.setupUi(report_view)
+    #     report_view.show()
+    #     sys.exit(app.exec_())
