@@ -90,7 +90,7 @@ class Ui_MainWindow(object):
         isP = path.isfile(sitem.icon)
 
         if isP:
-            print("file = " + str(isP))
+            # print("file = " + str(isP))
             item = QtWidgets.QListWidgetItem()
             item.setData(QtCore.Qt.UserRole, sitem)
             item.setTextAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignVCenter)
@@ -335,21 +335,9 @@ class Ui_MainWindow(object):
     def add_item(self, input, imgtype):
         global app
         global ui
-        print("entro a table view")
-        print(input)
-        print(input[0]+imgtype)
-        # try:
+        # print(input[0]+imgtype)
         item = store_item.makeItem(input[0] + imgtype, input[1], input[2], input[3])
         self.addElement(item)
         MainWindow.show()
         app.exec_()
-        # except (FileNotFoundError, IOError):
-        #     try:
-        #         item = store_item.makeItem(input[0] + imgtype, input[1], input[2], input[3])
-        #         print(".. Searching .jpg image.")
-        #         self.addElement(item)
-        #         MainWindow.show()
-        #         app.exec_()
-        #     except (FileNotFoundError, IOError):
-        #         print(" * Image not found * ")
 

@@ -1,9 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from report_view import Ui_report_view
-<<<<<<< HEAD
+# HEAD
 # from main_view import Ui_MainWindow
-=======
->>>>>>> e6e3c552e4f1f2f5bbdb67b94c49c533d76c28e6
 from create_report_view import Ui_reportCreateView as RCV
 from receipt_view import Ui_Form as RV
 # from store_item import store_item
