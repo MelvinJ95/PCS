@@ -352,10 +352,10 @@ def p_paragraph(p):
 def makeParagraph(input_tuple):
     # print(input_tuple)
     if len(input_tuple) == 2:
-        tempStr = str(input_tuple[0])+str(makeParagraph(input_tuple[1]))
+        tempStr = str(makeParagraph(input_tuple[1]))
     elif len(input_tuple) == 3:
         if input_tuple[2] == "\"":
-            tempStr = ''.join(input_tuple)
+            tempStr = str(input_tuple[0])+str(input_tuple[1])
             return tempStr
         else:
             tempStr = str(input_tuple[0])+str(input_tuple[1])+str(makeParagraph(input_tuple[2]))
@@ -379,6 +379,7 @@ def p_receiptexpr_append(p):
     print(p[0])
     if p[9] == "header":
         print(".. Adding ", p[5], " to", p[9])
+        ui.appendToHeader(p[5])
         # TODO: insert function here
     if p[9] == "body":
         print(".. Adding ", p[5], " to", p[9])
