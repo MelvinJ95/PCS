@@ -41,18 +41,18 @@ itemsTable.header(["file path","article name","type","price"])
 itemsTable.add_row(["jamonilla.jpg", "jamonilla", "food", 2.15])
 itemsTable.add_row(["rice.jpg", "rice", "food", 5.14])
 itemsTable.add_row(["coke.jpg", "coke", "food", 1.00])
-itemsTable.add_row(["papa.png", "papa", "food", 1.15])
 
 
 def break_tuple_3(tuplo):
-    if len(tuplo) == 3 and tuplo[2] is not None:
+    if len(tuplo) == 4 and tuplo[3] is not None:
         tempList.append(tuplo[0])
-        break_tuple_3(tuplo[2])
+        break_tuple_3(tuplo[3])
     else:
         tempList.append(tuplo[0])
 
 
 def create_table(table_head):
+    print(".. Creating/ChangingHead to:", table_head[0])
     if table_head[0] == iKey:
         break_tuple_3(table_head[1])
         itemsTable.header(tempList)
@@ -68,44 +68,46 @@ def create_table(table_head):
 
 
 def add_item(ui, table_name, table_row):
-    # tempList.clear()
-    print("    dalsdfi   ".strip())
-    print("inside add_row: tname-", table_name.strip(), "trow-", table_row)
-    print("1) inside add_row: tname-", table_name.strip())
     if table_name.strip() == iKey:
         try:
             ui.add_item(table_row, ".png")
-            print(".. Searching .png image.")
+            itemsTable.add_row(table_row)
+            print(itemsTable.draw())
+            print(".. Found .png image.")
         except FileNotFoundError:
             try:
                 ui.add_item(table_row, ".jpg")
-                print(".. Searching .jpg image.")
+                itemsTable.add_row(table_row)
+                print(itemsTable.draw())
+                print(".. Found .jpg image.")
             except FileNotFoundError:
+                print(itemsTable.draw())
                 print(" * Image not found * ")
-
-        print("2) inside add_row: tname-", table_name.strip())
-        itemsTable.add_row(table_row)
-        print(itemsTable.draw())
     elif table_name.strip() == rKey:
         reportTable.add_row(table_row)
         print(reportTable.draw())
 
 
 def add_row(ui, table_row):
+    print(".. Adding row to:", table_row[0])
+    print(".. Showing main window")
     tempList.clear()
     if table_row[0] == iKey:
         break_tuple_3(table_row[1])
         try:
             ui.add_item(tempList, ".png")
-            print(".. Searching .png image.")
+            itemsTable.add_row(tempList)
+            print(itemsTable.draw())
+            print(".. Found .png image.")
         except FileNotFoundError:
             try:
                 ui.add_item(tempList, ".jpg")
-                print(".. Searching .jpg image.")
+                itemsTable.add_row(tempList)
+                print(itemsTable.draw())
+                print(".. Found .jpg image.")
             except FileNotFoundError:
+                print(itemsTable.draw())
                 print(" * Image not found * ")
-        itemsTable.add_row(tempList)
-        print(itemsTable.draw())
     elif table_row[0] == rKey:
         break_tuple_3(table_row[1])
         reportTable.add_row(tempList)

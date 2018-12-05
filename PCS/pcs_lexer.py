@@ -39,14 +39,11 @@ tokens = [
     'MULTIPLY',
     'DIVIDE',
     'PERIOD',
-    'LPAREN',
-    'RPAREN',
     'EQUALS',
     'STRING',
     'TABLE_C',
     'TABLE_R',
     'COMMA',
-    'PATHNAME',
     'HEAD',
     'BODY',
     'FOOTER',
@@ -55,6 +52,7 @@ tokens = [
     'CLEAR',
     'TO',
     'VIEW',
+    'REPORT',
     'SET_SHOP_NAME',
     'SET_DIMENSION',
     'SET_CART_ROW_SIZE',
@@ -62,8 +60,10 @@ tokens = [
     'ADD_ITEM',
     'item_type_enable',
     'item_enable',
+    'SPACE',
+    'COLON',
     'EXIT'
-  ]  #+ list(reserved.values())
+  ]  # + list(reserved.values())
 
 
 # Regular expression rules for simple tokens
@@ -71,11 +71,11 @@ t_PLUS = r'\+'
 t_MINUS = r'-'
 t_MULTIPLY = r'\*'
 t_DIVIDE = r'/'
-t_LPAREN = r'\('
-t_RPAREN = r'\)'
 t_EQUALS = r'\='
 t_COMMA = r'\,'
 t_PERIOD = r'\.'
+t_COLON = r'\"'
+t_SPACE = r'\ '
 
 
 # A regular expression rule with some action code
@@ -93,13 +93,13 @@ def t_NUMBER(t):
 
 
 def t_TRUE(t):
-    r'(true)'
+    r'true'
     t.value = True
     return t
 
 
 def t_FALSE(t):
-    r'(false)'
+    r'false'
     t.value = False
     return t
 
@@ -118,6 +118,11 @@ def t_TABLE_R(t):
 # Main View Functions
 def t_VIEW(t):
     r'view'
+    return t
+
+
+def t_REPORT(t):
+    r'report'
     return t
 
 
@@ -148,7 +153,7 @@ def t_ADD_ITEM(t):
 
 # HEAD_BODY_FOOTER
 def t_HEAD(t):
-    r'head'
+    r'header'
     return t
 
 
@@ -184,12 +189,14 @@ def t_TO(t):
 
 
 def t_item_type_enable(t):
-    r'report\ item_type_enable'
+    r'item_type_enable'
     return t
 
+
 def t_item_enable(t):
-    r'report\ item_enable'
+    r'item_enable'
     return t
+
 
 def t_EXIT(t):
     r'exit'
@@ -202,15 +209,9 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
 
 
-
 # A string containing ignored characters (spaces and tabs)
-t_ignore = ' \t'
+t_ignore = '\t'
 t_ignore_COMMENT = r'\#.*'
-
-
-def t_PATHNAME(t):
-    r'add'
-    return t
 
 
 def t_NAME(t):
@@ -247,17 +248,17 @@ def p_expr(p):
     expr : expression
          | item_details
          | tableExp
-         | pathexpr
          | receiptexpr
          | mainviewexpr
          | reportexpr
          | empty
          | EXIT
     '''
+    # print(p[1], "| len =", len(p[1]))
     if p[1] == "exit":
         exit(0)
-    if p[1] is not None:
-        print("doing math expression")
+    if run(p[1]) is not None:
+        # print("doing math expression")
         print(run(p[1]))
     else: None
         # print(" to be attended ")
@@ -270,7 +271,6 @@ def p_id(p):
         | NUMBER
         | STRING
     '''
-    print("doing a float or string for id")
     p[0] = p[1]
 
 
@@ -279,7 +279,6 @@ def p_boolean(p):
     boolean : TRUE
             | FALSE
     '''
-    print("doing a boolean")
     p[0] = p[1]
 
 
@@ -298,21 +297,10 @@ def p_expression_int_float(p):
     expression : FLOAT
                | NUMBER
     '''
-    print("this is float or int expression\n", p[1])
+    # print("this is float or int expression\n", p[1])
     p[0] = p[1]
-    print("this is float or int expression\n", p[1])
+    # print("this is float or int expression\n", p[1])
 
-# Path Parsing
-def p_pathexpr(p):
-    '''
-    pathexpr : PERIOD PERIOD DIVIDE pathexpr
-           | PERIOD DIVIDE pathexpr
-           | STRING DIVIDE pathexpr
-           | STRING DIVIDE filename
-    filename : STRING PERIOD STRING
-           | STRING
-    '''
-    p[0] = p[1]
 
 # Receipt Parsing
 def p_receiptexpr_creat(p):
@@ -328,61 +316,77 @@ def p_receiptexpr_creat(p):
 
 def p_receiptexpr_append(p):
     '''
-    receiptexpr : RECEIPT APPEND STRING TO HEAD
-            | RECEIPT APPEND STRING TO BODY
-            | RECEIPT APPEND STRING TO FOOTER
+    receiptexpr : RECEIPT SPACE APPEND SPACE paragraph SPACE TO SPACE HEAD
+            | RECEIPT SPACE APPEND SPACE paragraph SPACE TO SPACE BODY
+            | RECEIPT SPACE APPEND SPACE paragraph SPACE TO SPACE FOOTER
     '''
-    print((p[1],p[2],p[3],p[4],p[5]))
-    p[0] = (p[1],p[2],p[3],p[4],p[5])
+    # receipt append "The Head Text. Aqui." to header               # TODO
+    # receipt append "The Body Text. Aqui." to body                 # TODO
+    # receipt append "The Foot Text. Aqui." to footer               # TODO
+    p[0] = (p[1], p[3], p[5], p[7], p[9])
+    print(p[0])
+    if p[9] == "header":
+        print(".. Adding ", p[5], " to", p[9])
+        # TODO: insert function here
+    if p[9] == "body":
+        print(".. Adding ", p[5], " to", p[9])
+        # TODO: insert function here
+    if p[9] == "footer":
+        print(".. Adding ", p[5], " to", p[9])
+        # TODO: insert function here
 
 
 def p_mainviewexp(p) :
     '''
-    mainviewexpr : VIEW STRING
-                | VIEW ADD_ITEM item_details
-                | VIEW SET_SHOP_NAME STRING
-                | VIEW SET_DIMENSION NUMBER COMMA NUMBER
-                | VIEW SET_CART_ROW_SIZE NUMBER
-                | VIEW SET_CART_QUANTITY_ENABLE boolean
+    mainviewexpr : VIEW SPACE STRING
+                | VIEW SPACE ADD_ITEM SPACE item_details
+                | VIEW SPACE SET_SHOP_NAME SPACE STRING
+                | VIEW SPACE SET_DIMENSION SPACE NUMBER SPACE COMMA SPACE NUMBER
+                | VIEW SPACE SET_CART_ROW_SIZE SPACE NUMBER
+                | VIEW SPACE SET_CART_QUANTITY_ENABLE SPACE boolean
     '''
-    # view add_item papa, papa1, foo, 1.23
-    global receipt
-    if len(p) < 4:
-        if p[2] == "shop":
-            ui.appendToHeader("yeah bitch!")
-            print("done view shop")
+    # view shop                                         # DONE
+    # view add_item papa, papa1, foo, 1.23              # DONE
+    # view set_shop_name TheNameYouWant                 # DONE
+    # view set_dimension 1000, 1200                     # TODO
+    # view set_cart_row_size 4                          # TODO
+    # view set_cart_quantity_enable true                # TODO
+    # view set_dimension 1000, 1200                     # TODO
+    if len(p) < 5:
+        if p[3] == "shop":
+            print(".. Showing main window")
             ui.show_main_window()
-            p[0] = p[2]
         else:
-            print("Expected [ view shop ] but instead found [ view ", p[2], "]")
+            print("Expected [ view shop ] but instead found [ view ", p[3], "]")
             p_error(p)
     else:
-        print("-", p[1], "-", p[2], "-", p[3])
-        if p[2] == "add_item":
+        if p[3] == "add_item":
             print(".. Adding item to items table")
-            tm.add_item(ui, "items", p[3])
-            # ui.table_to_view(p[3])
-        elif p[2] == "set_shop_name":
-            print(".. Setting shop named to:", p[3])
-            ui.set_shop_name(p[3])
+            print(".. Showing main window")
+            tm.add_item(ui, "items", p[5])
+        elif p[3] == "set_shop_name":
+            print(".. Setting shop named to:", p[5])
+            print(".. Showing main window")
+            ui.set_shop_name(p[5])
+            ui.show_main_window()
         else:
             # str(p[2])
-            print((p[1], p[2], p[3]))
-            p[0] = (p[1], p[2], p[3])
+            print((p[1], p[3], p[5]))
+            p[0] = (p[1], p[3], p[5])
 
 
 def p_item_details(p):
     '''
-    item_details : STRING COMMA STRING COMMA STRING COMMA FLOAT
+    item_details : STRING COMMA SPACE STRING COMMA SPACE STRING COMMA SPACE FLOAT
     '''
-    p[0] = (p[1], p[3], p[5], p[7])
+    p[0] = (p[1], p[4], p[7], p[10])
 
 
-def p_table_to_view(p):
-    '''
-    mainviewexpr : VIEW TABLE_C STRING
-    '''
-    ui.table_to_view(tm.table_to_view(p[3]))
+# def p_table_to_view(p):
+#     '''
+#     mainviewexpr : VIEW TABLE_C STRING
+#     '''
+#     ui.table_to_view(tm.table_to_view(p[3]))
 
 
 # def p_path_series(p):
@@ -401,42 +405,43 @@ def p_table_to_view(p):
 # Table Parsing
 def p_createTable(p):
     '''
-    tableExp : TABLE_C STRING column
+    tableExp : TABLE_C SPACE STRING SPACE column
     '''
-    # table items uno, dos, tres, cuatro
-    # print((p[1], p[2]))
-    p[0] = (p[2], p[3])
+    # table items uno, dos, tres, cuatro                # DONE
+    p[0] = (p[3], p[5])
+    # print(p[0])
     tm.create_table(p[0])
 
 
 def p_addRowToTable(p):
     '''
-    tableExp : TABLE_R STRING column
+    tableExp : TABLE_R SPACE STRING SPACE column
     '''
-    # addRow items jamonilla, dos, tres, 1.2
-    # print((p[1], p[2]))
-    p[0] = (p[2], p[3])
+    # addRow items jamonilla, dos, tres, 1.2            # DONE
+    p[0] = (p[3], p[5])
+    # print(p[0])
     tm.add_row(ui, p[0])
 
-def p_showTable (p):
+
+def p_showTable(p):
     '''
-    tableExp : TABLE_C STRING
+    tableExp : TABLE_C SPACE STRING
     '''
-    tm.show_table(p[2])
-    print(p[2])
-    p[0] = (p[1], p[2])
+    # table items                                       # DONE
+    tm.show_table(p[3])
+    p[0] = (p[1], p[3])
 
 
 def p_column(p):
     '''
     column : id
-            | id COMMA column
+            | id COMMA SPACE column
     '''
     tempList = []
     for thing in p:
-        if thing != None:
+        if thing is not None:
             tempList.append(thing)
-    #print(tuple(tempList))
+    # print(tuple(tempList))
     p[0] = (tuple(tempList))
 
 # report create view functions
@@ -448,23 +453,23 @@ def p_column(p):
 #     p[0] = p[1]
 
 # reportCV_expression
+
+
 def p_report_create_view(p):
     '''
-    reportexpr : item_type_enable boolean
-                | item_enable boolean
+    reportexpr : REPORT SPACE item_type_enable SPACE boolean
+                | REPORT SPACE item_enable SPACE boolean
     '''
-    print((p[1], p[2]))
-    p[0] = (p[1], p[2])
-    # print(p[1])
-    # p[0] = p[1]
-
-
-# def p_exit(p):
-#     '''
-#     expression : EXIT
-#     '''
-#     exit(0)
-
+    # report item_type_enable true                              # TODO
+    # report item_enable true                                   # TODO
+    p[0] = (p[1], p[3], p[5])
+    print(p[0])
+    if p[3] == "item_type_enable":
+        print(".. Item type enable set to:", p[5])
+        # TODO: insert function here
+    if p[3] == "item_enable":
+        print(".. Item enable set to:", p[5])
+        # TODO: insert function here
 
 def p_empty(p):
     '''
@@ -474,6 +479,7 @@ def p_empty(p):
 
 
 def p_error(p):
+    print("Error: This is p:", p)
     print("Syntax error found!")
 
 
