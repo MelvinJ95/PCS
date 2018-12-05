@@ -1,0 +1,19 @@
+
+    # receipt clear header                                      # DONE
+    # receipt clear body                                        # DONE
+    # receipt clear footer                                      # DONE
+    # receipt append "The Head Text. Aqui." to header           # DONE
+    # receipt append "The Body Text. Aqui." to body             # TODO
+    # receipt append "The Foot Text. Aqui." to footer           # TODO
+    # view shop                                                 # DONE
+    # view add_item papa, papa1, foo, 1.23                      # DONE
+    # view set_shop_name TheNameYouWant                         # DONE
+    # view set_dimension 1000, 1200                             # TODO
+    # view set_cart_row_size 4                                  # TODO
+    # view set_cart_quantity_enable true                        # TODO
+    # view set_dimension 1000, 1200                             # TODO
+    # table items uno, dos, tres, cuatro                        # DONE
+    # addRow items jamonilla, dos, tres, 1.2                    # DONE
+    # table items                                               # DONE
+    # report item_type_enable true                              # TODO
+    # report item_enable true                                   # TODO
