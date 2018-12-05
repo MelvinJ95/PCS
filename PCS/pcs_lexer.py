@@ -361,7 +361,7 @@ def makeParagraph(input_tuple):
         print(" * Not defined * ")
     return tempStr
 
-
+# fix test
 def p_receiptexpr_append(p):
     '''
     receiptexpr : RECEIPT SPACE APPEND SPACE paragraph SPACE TO SPACE HEAD
