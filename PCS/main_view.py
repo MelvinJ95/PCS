@@ -10,6 +10,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import functions as FT
 from store_item import store_item
 import os.path as path
+from receipt_view import Ui_Form as RV
 
 class Ui_MainWindow(object):
     global element_index
@@ -17,7 +18,79 @@ class Ui_MainWindow(object):
     global app
     global MainWindow
     global cart_list  # VARIABLE HOLDING CART ITEM
+    global VReceipt
+    global Form
+    global headerText
+    global bodyText
+    global footerText
     cart_list = []
+
+    def receipt(self):
+        global VReceipt
+        global app
+        print("entered receipt")
+        MainWindow.window = QtWidgets.QMainWindow()
+        MainWindow.ui = VReceipt
+        MainWindow.ui.setupUi(MainWindow.window)
+        MainWindow.window.show()
+        self.appendToHeader("que porqueria")
+
+    def set_receipt(self, object):
+        global VReceipt
+        VReceipt = object
+
+    def initialize_receipt(self):
+        global Form
+        global VReceipt
+        Form = QtWidgets.QWidget()
+        RV().setupUi(Form)
+        VReceipt = RV()
+        return VReceipt
+
+    def clearHeader(self): #RECEIPT
+        global Form
+        global VReceipt
+        global headerText
+        headerText = VReceipt.header_text.toPlainText()
+        headerText = ""
+        VReceipt.header_text.setPlainText(QtCore.QCoreApplication.translate("Form", headerText))  # centered
+
+    def appendToHeader(self, x):
+        global Form
+        global VReceipt
+        global headerText
+        headerText = headerText + x + "\n"
+        print(headerText)
+        VReceipt.header_text.setPlainText(QtCore.QCoreApplication.translate("Form", headerText)) #centered
+
+    def clearBody(self):
+        global Form
+        global VReceipt
+        global bodyText
+        bodyText = VReceipt.header_text.toPlainText()
+        bodyText = ""
+        VReceipt.body_text.setPlainText(QtCore.QCoreApplication.translate("Form", bodyText))  # centered
+
+    def appendToBody(self,x):
+        global Form
+        global VReceipt
+        global bodyText
+        bodyText = bodyText + x + "\n"
+        VReceipt.body_text.setPlainText(QtCore.QCoreApplication.translate("Form", bodyText))  # centered
+
+    def clearFooter(self):
+        global Form
+        global VReceipt
+        global footerText
+        footerText = ""
+        VReceipt.footer_text.setPlainText(QtCore.QCoreApplication.translate("Form", footerText))  # centered
+
+    def appendToFooter(self,x):
+        global Form
+        global VReceipt
+        global footerText
+        footerText = footerText + x + "\n"
+        VReceipt.footer_text.setPlainText(QtCore.QCoreApplication.translate("Form", footerText))  # centere
 
     def checkout(self):
         global cart_list
@@ -29,7 +102,7 @@ class Ui_MainWindow(object):
             price = self.cart_table.item(irow, 1).text()
             File.write((item + " " + price) + "\n")
         File.close()
-        FT.function().receipt()
+        self.receipt()
 
     def add_toCart(self, item):
         item_to_send = item.data(QtCore.Qt.UserRole)
@@ -297,13 +370,23 @@ class Ui_MainWindow(object):
         # Give function an Instance of Main Window to have access to UI Elements
         FT.function().returnObj(self)
 
-
+    # def setFunction(self, ob_receipt):
+    #     global FT
+    #     FT = ob_receipt
 
     def guiMain(self):
         import sys
         global app
         global ui
         global MainWindow
+        global headerText
+        global bodyText
+        global footerText
+
+        headerText = ""
+        bodyText = ""
+        footerText = ""
+        # global FT
         app = QtWidgets.QApplication(sys.argv)
         MainWindow = QtWidgets.QMainWindow()
         # ui = Ui_MainWindow()
@@ -322,6 +405,7 @@ class Ui_MainWindow(object):
         # MainWindow.show()
         # app.exec_()
         # sys.exit(app.exec_())
+        return FT.function()
 
 
     def set_shop_name(self, name):

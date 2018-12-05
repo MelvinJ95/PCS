@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftPLUSMINUSleftMULTIPLYDIVIDEADD_ITEM APPEND BODY CLEAR COLON COMMA DIVIDE EQUALS EXIT FALSE FLOAT FOOTER HEAD MINUS MULTIPLY NUMBER PERIOD PLUS RECEIPT REPORT SET_CART_QUANTITY_ENABLE SET_CART_ROW_SIZE SET_DIMENSION SET_SHOP_NAME SPACE STRING TABLE_C TABLE_R TO TRUE VIEW item_enable item_type_enable\n    expr : expression\n         | item_details\n         | tableExp\n         | receiptexpr\n         | mainviewexpr\n         | reportexpr\n         | empty\n         | EXIT\n    \n    id : FLOAT\n        | NUMBER\n        | STRING\n    \n    boolean : TRUE\n            | FALSE\n    \n    expression : expression MULTIPLY expression\n               | expression DIVIDE expression\n               | expression PLUS expression\n               | expression MINUS expression\n    \n    expression : FLOAT\n               | NUMBER\n    \n    receiptexpr : RECEIPT SPACE CLEAR SPACE HEAD\n            | RECEIPT SPACE CLEAR SPACE BODY\n            | RECEIPT SPACE CLEAR SPACE FOOTER\n    \n    sentence : sentence PERIOD sentence\n            | STRING SPACE sentence\n            | STRING COMMA SPACE sentence\n            | STRING PERIOD SPACE sentence\n            | STRING PERIOD COLON\n            | NUMBER SPACE sentence\n            | NUMBER COMMA SPACE sentence\n            | NUMBER PERIOD SPACE sentence\n            | NUMBER PERIOD COLON\n    \n    paragraph : COLON sentence\n    \n    receiptexpr : RECEIPT SPACE APPEND SPACE paragraph SPACE TO SPACE HEAD\n            | RECEIPT SPACE APPEND SPACE paragraph SPACE TO SPACE BODY\n            | RECEIPT SPACE APPEND SPACE paragraph SPACE TO SPACE FOOTER\n    \n    mainviewexpr : VIEW SPACE STRING\n                | VIEW SPACE ADD_ITEM SPACE item_details\n                | VIEW SPACE SET_SHOP_NAME SPACE STRING\n                | VIEW SPACE SET_DIMENSION SPACE NUMBER SPACE COMMA SPACE NUMBER\n                | VIEW SPACE SET_CART_ROW_SIZE SPACE NUMBER\n                | VIEW SPACE SET_CART_QUANTITY_ENABLE SPACE boolean\n    \n    item_details : STRING COMMA SPACE STRING COMMA SPACE STRING COMMA SPACE FLOAT\n    \n    tableExp : TABLE_C SPACE STRING SPACE column\n    \n    tableExp : TABLE_R SPACE STRING SPACE column\n    \n    tableExp : TABLE_C SPACE STRING\n    \n    column : id\n            | id COMMA SPACE column\n    \n    reportexpr : REPORT SPACE item_type_enable SPACE boolean\n                | REPORT SPACE item_enable SPACE boolean\n    \n    empty :\n    '
+_lr_signature = 'leftPLUSMINUSleftMULTIPLYDIVIDEADD_ITEM APPEND BODY CLEAR COMMA DIVIDE EQUALS EXIT FALSE FLOAT FOOTER HEAD LPAREN MINUS MULTIPLY NUMBER PATHNAME PERIOD PLUS RECEIPT RPAREN SET_CART_QUANTITY_ENABLE SET_CART_ROW_SIZE SET_DIMENSION SET_SHOP_NAME STRING TABLE_C TABLE_R TO TRUE VIEW item_enable item_type_enable\n    expr : expression\n         | item_details\n         | tableExp\n         | pathexpr\n         | receiptexpr\n         | mainviewexpr\n         | reportexpr\n         | empty\n         | EXIT\n    \n    id : FLOAT\n        | NUMBER\n        | STRING\n    \n    boolean : TRUE\n            | FALSE\n    \n    expression : expression MULTIPLY expression\n               | expression DIVIDE expression\n               | expression PLUS expression\n               | expression MINUS expression\n    \n    expression : FLOAT\n               | NUMBER\n    \n    pathexpr : PERIOD PERIOD DIVIDE pathexpr\n           | PERIOD DIVIDE pathexpr\n           | STRING DIVIDE pathexpr\n           | STRING DIVIDE filename\n    filename : STRING PERIOD STRING\n           | STRING\n    \n    receiptexpr : RECEIPT CLEAR HEAD\n            | RECEIPT CLEAR BODY\n            | RECEIPT CLEAR FOOTER\n    \n    receiptexpr : RECEIPT APPEND STRING TO HEAD\n            | RECEIPT APPEND STRING TO BODY\n            | RECEIPT APPEND STRING TO FOOTER\n    \n    mainviewexpr : VIEW STRING\n                | VIEW ADD_ITEM item_details\n                | VIEW SET_SHOP_NAME STRING\n                | VIEW SET_DIMENSION NUMBER COMMA NUMBER\n                | VIEW SET_CART_ROW_SIZE NUMBER\n                | VIEW SET_CART_QUANTITY_ENABLE boolean\n    \n    item_details : STRING COMMA STRING COMMA STRING COMMA FLOAT\n    \n    mainviewexpr : VIEW TABLE_C STRING\n    \n    tableExp : TABLE_C STRING column\n    \n    tableExp : TABLE_R STRING column\n    \n    tableExp : TABLE_C STRING\n    \n    column : id\n            | id COMMA column\n    \n    reportexpr : item_type_enable boolean\n                | item_enable boolean\n    \n    empty :\n    '
     
-_lr_action_items = {'EXIT':([0,],[9,]),'FLOAT':([0,18,19,20,21,46,47,86,109,],[10,10,10,10,10,61,61,61,118,]),'NUMBER':([0,18,19,20,21,46,47,52,53,68,86,88,89,92,101,102,105,106,108,],[11,11,11,11,11,62,62,71,72,83,62,83,83,83,83,83,83,83,117,]),'STRING':([0,23,24,26,32,46,47,50,51,68,78,86,88,89,92,101,102,105,106,],[12,33,34,37,45,58,58,12,70,82,85,58,82,82,82,82,82,82,82,]),'TABLE_C':([0,],[13,]),'TABLE_R':([0,],[14,]),'RECEIPT':([0,],[15,]),'VIEW':([0,],[16,]),'REPORT':([0,],[17,]),'$end':([0,1,2,3,4,5,6,7,8,9,10,11,28,29,30,31,33,37,58,59,60,61,62,63,64,65,66,69,70,72,73,74,75,76,77,97,110,111,112,117,118,],[-50,0,-1,-2,-3,-4,-5,-6,-7,-8,-18,-19,-14,-15,-16,-17,-45,-36,-11,-43,-46,-9,-10,-44,-20,-21,-22,-37,-38,-40,-41,-12,-13,-48,-49,-47,-33,-34,-35,-39,-42,]),'MULTIPLY':([2,10,11,28,29,30,31,],[18,-18,-19,-14,-15,18,18,]),'DIVIDE':([2,10,11,28,29,30,31,],[19,-18,-19,-14,-15,19,19,]),'PLUS':([2,10,11,28,29,30,31,],[20,-18,-19,-14,-15,-16,-17,]),'MINUS':([2,10,11,28,29,30,31,],[21,-18,-19,-14,-15,-16,-17,]),'COMMA':([12,45,58,60,61,62,82,83,84,85,],[22,57,-11,79,-9,-10,90,93,95,96,]),'SPACE':([13,14,15,16,17,22,33,34,35,36,38,39,40,41,42,43,44,57,67,71,79,81,82,83,87,90,91,93,94,95,96,99,100,103,104,107,113,114,115,116,],[23,24,25,26,27,32,46,47,48,49,50,51,52,53,54,55,56,78,80,84,86,-32,89,92,98,101,102,105,106,108,109,-23,-24,-27,-28,-31,-25,-26,-29,-30,]),'CLEAR':([25,],[35,]),'APPEND':([25,],[36,]),'ADD_ITEM':([26,],[38,]),'SET_SHOP_NAME':([26,],[39,]),'SET_DIMENSION':([26,],[40,]),'SET_CART_ROW_SIZE':([26,],[41,]),'SET_CART_QUANTITY_ENABLE':([26,],[42,]),'item_type_enable':([27,],[43,]),'item_enable':([27,],[44,]),'HEAD':([48,98,],[64,110,]),'BODY':([48,98,],[65,111,]),'FOOTER':([48,98,],[66,112,]),'COLON':([49,91,94,],[68,103,107,]),'TRUE':([54,55,56,],[74,74,74,]),'FALSE':([54,55,56,],[75,75,75,]),'TO':([80,],[87,]),'PERIOD':([81,82,83,99,100,103,104,107,113,114,115,116,],[88,91,94,88,88,-27,88,-31,88,88,88,88,]),}
+_lr_action_items = {'EXIT':([0,],[10,]),'FLOAT':([0,21,22,23,24,27,28,74,85,],[11,11,11,11,11,55,55,55,86,]),'NUMBER':([0,21,22,23,24,27,28,36,37,74,77,],[12,12,12,12,12,56,56,68,69,56,84,]),'STRING':([0,14,15,18,25,26,27,28,30,32,34,35,39,58,72,73,74,],[13,27,28,33,48,49,52,52,60,64,66,67,71,60,78,79,52,]),'TABLE_C':([0,18,],[14,39,]),'TABLE_R':([0,],[15,]),'PERIOD':([0,16,26,30,49,58,],[16,29,16,16,73,16,]),'RECEIPT':([0,],[17,]),'VIEW':([0,],[18,]),'item_type_enable':([0,],[19,]),'item_enable':([0,],[20,]),'$end':([0,1,2,3,4,5,6,7,8,9,10,11,12,27,33,40,41,42,43,44,45,46,47,49,50,51,52,53,54,55,56,57,59,61,62,63,65,67,69,70,71,75,79,80,81,82,83,84,86,],[-48,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-19,-20,-43,-33,-46,-13,-14,-47,-15,-16,-17,-18,-26,-23,-24,-12,-41,-44,-10,-11,-42,-22,-27,-28,-29,-34,-35,-37,-38,-40,-21,-25,-45,-30,-31,-32,-36,-39,]),'MULTIPLY':([2,11,12,44,45,46,47,],[21,-19,-20,-15,-16,21,21,]),'DIVIDE':([2,11,12,13,16,29,44,45,46,47,49,60,],[22,-19,-20,26,30,58,-15,-16,22,22,26,26,]),'PLUS':([2,11,12,44,45,46,47,],[23,-19,-20,-15,-16,-17,-18,]),'MINUS':([2,11,12,44,45,46,47,],[24,-19,-20,-15,-16,-17,-18,]),'COMMA':([13,48,52,54,55,56,66,68,78,],[25,72,-12,74,-10,-11,25,77,85,]),'CLEAR':([17,],[31,]),'APPEND':([17,],[32,]),'ADD_ITEM':([18,],[34,]),'SET_SHOP_NAME':([18,],[35,]),'SET_DIMENSION':([18,],[36,]),'SET_CART_ROW_SIZE':([18,],[37,]),'SET_CART_QUANTITY_ENABLE':([18,],[38,]),'TRUE':([19,20,38,],[41,41,41,]),'FALSE':([19,20,38,],[42,42,42,]),'HEAD':([31,76,],[61,81,]),'BODY':([31,76,],[62,82,]),'FOOTER':([31,76,],[63,83,]),'TO':([64,],[76,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expr':([0,],[1,]),'expression':([0,18,19,20,21,],[2,28,29,30,31,]),'item_details':([0,50,],[3,69,]),'tableExp':([0,],[4,]),'receiptexpr':([0,],[5,]),'mainviewexpr':([0,],[6,]),'reportexpr':([0,],[7,]),'empty':([0,],[8,]),'column':([46,47,86,],[59,63,97,]),'id':([46,47,86,],[60,60,60,]),'paragraph':([49,],[67,]),'boolean':([54,55,56,],[73,76,77,]),'sentence':([68,88,89,92,101,102,105,106,],[81,99,100,104,113,114,115,116,]),}
+_lr_goto_items = {'expr':([0,],[1,]),'expression':([0,21,22,23,24,],[2,44,45,46,47,]),'item_details':([0,34,],[3,65,]),'tableExp':([0,],[4,]),'pathexpr':([0,26,30,58,],[5,50,59,75,]),'receiptexpr':([0,],[6,]),'mainviewexpr':([0,],[7,]),'reportexpr':([0,],[8,]),'empty':([0,],[9,]),'boolean':([19,20,38,],[40,43,70,]),'filename':([26,],[51,]),'column':([27,28,74,],[53,57,80,]),'id':([27,28,74,],[54,54,54,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,54 +27,52 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> expr","S'",1,None,None,None),
-  ('expr -> expression','expr',1,'p_expr','pcs_lexer.py',243),
-  ('expr -> item_details','expr',1,'p_expr','pcs_lexer.py',244),
-  ('expr -> tableExp','expr',1,'p_expr','pcs_lexer.py',245),
-  ('expr -> receiptexpr','expr',1,'p_expr','pcs_lexer.py',246),
-  ('expr -> mainviewexpr','expr',1,'p_expr','pcs_lexer.py',247),
-  ('expr -> reportexpr','expr',1,'p_expr','pcs_lexer.py',248),
-  ('expr -> empty','expr',1,'p_expr','pcs_lexer.py',249),
-  ('expr -> EXIT','expr',1,'p_expr','pcs_lexer.py',250),
-  ('id -> FLOAT','id',1,'p_id','pcs_lexer.py',265),
-  ('id -> NUMBER','id',1,'p_id','pcs_lexer.py',266),
-  ('id -> STRING','id',1,'p_id','pcs_lexer.py',267),
-  ('boolean -> TRUE','boolean',1,'p_boolean','pcs_lexer.py',274),
-  ('boolean -> FALSE','boolean',1,'p_boolean','pcs_lexer.py',275),
-  ('expression -> expression MULTIPLY expression','expression',3,'p_expression','pcs_lexer.py',282),
-  ('expression -> expression DIVIDE expression','expression',3,'p_expression','pcs_lexer.py',283),
-  ('expression -> expression PLUS expression','expression',3,'p_expression','pcs_lexer.py',284),
-  ('expression -> expression MINUS expression','expression',3,'p_expression','pcs_lexer.py',285),
-  ('expression -> FLOAT','expression',1,'p_expression_int_float','pcs_lexer.py',292),
-  ('expression -> NUMBER','expression',1,'p_expression_int_float','pcs_lexer.py',293),
-  ('receiptexpr -> RECEIPT SPACE CLEAR SPACE HEAD','receiptexpr',5,'p_receiptexpr_clear','pcs_lexer.py',303),
-  ('receiptexpr -> RECEIPT SPACE CLEAR SPACE BODY','receiptexpr',5,'p_receiptexpr_clear','pcs_lexer.py',304),
-  ('receiptexpr -> RECEIPT SPACE CLEAR SPACE FOOTER','receiptexpr',5,'p_receiptexpr_clear','pcs_lexer.py',305),
-  ('sentence -> sentence PERIOD sentence','sentence',3,'p_sentence','pcs_lexer.py',324),
-  ('sentence -> STRING SPACE sentence','sentence',3,'p_sentence','pcs_lexer.py',325),
-  ('sentence -> STRING COMMA SPACE sentence','sentence',4,'p_sentence','pcs_lexer.py',326),
-  ('sentence -> STRING PERIOD SPACE sentence','sentence',4,'p_sentence','pcs_lexer.py',327),
-  ('sentence -> STRING PERIOD COLON','sentence',3,'p_sentence','pcs_lexer.py',328),
-  ('sentence -> NUMBER SPACE sentence','sentence',3,'p_sentence','pcs_lexer.py',329),
-  ('sentence -> NUMBER COMMA SPACE sentence','sentence',4,'p_sentence','pcs_lexer.py',330),
-  ('sentence -> NUMBER PERIOD SPACE sentence','sentence',4,'p_sentence','pcs_lexer.py',331),
-  ('sentence -> NUMBER PERIOD COLON','sentence',3,'p_sentence','pcs_lexer.py',332),
-  ('paragraph -> COLON sentence','paragraph',2,'p_paragraph','pcs_lexer.py',337),
-  ('receiptexpr -> RECEIPT SPACE APPEND SPACE paragraph SPACE TO SPACE HEAD','receiptexpr',9,'p_receiptexpr_append','pcs_lexer.py',342),
-  ('receiptexpr -> RECEIPT SPACE APPEND SPACE paragraph SPACE TO SPACE BODY','receiptexpr',9,'p_receiptexpr_append','pcs_lexer.py',343),
-  ('receiptexpr -> RECEIPT SPACE APPEND SPACE paragraph SPACE TO SPACE FOOTER','receiptexpr',9,'p_receiptexpr_append','pcs_lexer.py',344),
-  ('mainviewexpr -> VIEW SPACE STRING','mainviewexpr',3,'p_mainviewexp','pcs_lexer.py',364),
-  ('mainviewexpr -> VIEW SPACE ADD_ITEM SPACE item_details','mainviewexpr',5,'p_mainviewexp','pcs_lexer.py',365),
-  ('mainviewexpr -> VIEW SPACE SET_SHOP_NAME SPACE STRING','mainviewexpr',5,'p_mainviewexp','pcs_lexer.py',366),
-  ('mainviewexpr -> VIEW SPACE SET_DIMENSION SPACE NUMBER SPACE COMMA SPACE NUMBER','mainviewexpr',9,'p_mainviewexp','pcs_lexer.py',367),
-  ('mainviewexpr -> VIEW SPACE SET_CART_ROW_SIZE SPACE NUMBER','mainviewexpr',5,'p_mainviewexp','pcs_lexer.py',368),
-  ('mainviewexpr -> VIEW SPACE SET_CART_QUANTITY_ENABLE SPACE boolean','mainviewexpr',5,'p_mainviewexp','pcs_lexer.py',369),
-  ('item_details -> STRING COMMA SPACE STRING COMMA SPACE STRING COMMA SPACE FLOAT','item_details',10,'p_item_details','pcs_lexer.py',403),
-  ('tableExp -> TABLE_C SPACE STRING SPACE column','tableExp',5,'p_createTable','pcs_lexer.py',431),
-  ('tableExp -> TABLE_R SPACE STRING SPACE column','tableExp',5,'p_addRowToTable','pcs_lexer.py',440),
-  ('tableExp -> TABLE_C SPACE STRING','tableExp',3,'p_showTable','pcs_lexer.py',449),
-  ('column -> id','column',1,'p_column','pcs_lexer.py',459),
-  ('column -> id COMMA SPACE column','column',4,'p_column','pcs_lexer.py',460),
-  ('reportexpr -> REPORT SPACE item_type_enable SPACE boolean','reportexpr',5,'p_report_create_view','pcs_lexer.py',484),
-  ('reportexpr -> REPORT SPACE item_enable SPACE boolean','reportexpr',5,'p_report_create_view','pcs_lexer.py',485),
-  ('empty -> <empty>','empty',0,'p_empty','pcs_lexer.py',500),
+  ('expr -> expression','expr',1,'p_expr','pcs_lexer.py',232),
+  ('expr -> item_details','expr',1,'p_expr','pcs_lexer.py',233),
+  ('expr -> tableExp','expr',1,'p_expr','pcs_lexer.py',234),
+  ('expr -> pathexpr','expr',1,'p_expr','pcs_lexer.py',235),
+  ('expr -> receiptexpr','expr',1,'p_expr','pcs_lexer.py',236),
+  ('expr -> mainviewexpr','expr',1,'p_expr','pcs_lexer.py',237),
+  ('expr -> reportexpr','expr',1,'p_expr','pcs_lexer.py',238),
+  ('expr -> empty','expr',1,'p_expr','pcs_lexer.py',239),
+  ('expr -> EXIT','expr',1,'p_expr','pcs_lexer.py',240),
+  ('id -> FLOAT','id',1,'p_id','pcs_lexer.py',253),
+  ('id -> NUMBER','id',1,'p_id','pcs_lexer.py',254),
+  ('id -> STRING','id',1,'p_id','pcs_lexer.py',255),
+  ('boolean -> TRUE','boolean',1,'p_boolean','pcs_lexer.py',262),
+  ('boolean -> FALSE','boolean',1,'p_boolean','pcs_lexer.py',263),
+  ('expression -> expression MULTIPLY expression','expression',3,'p_expression','pcs_lexer.py',271),
+  ('expression -> expression DIVIDE expression','expression',3,'p_expression','pcs_lexer.py',272),
+  ('expression -> expression PLUS expression','expression',3,'p_expression','pcs_lexer.py',273),
+  ('expression -> expression MINUS expression','expression',3,'p_expression','pcs_lexer.py',274),
+  ('expression -> FLOAT','expression',1,'p_expression_int_float','pcs_lexer.py',281),
+  ('expression -> NUMBER','expression',1,'p_expression_int_float','pcs_lexer.py',282),
+  ('pathexpr -> PERIOD PERIOD DIVIDE pathexpr','pathexpr',4,'p_pathexpr','pcs_lexer.py',291),
+  ('pathexpr -> PERIOD DIVIDE pathexpr','pathexpr',3,'p_pathexpr','pcs_lexer.py',292),
+  ('pathexpr -> STRING DIVIDE pathexpr','pathexpr',3,'p_pathexpr','pcs_lexer.py',293),
+  ('pathexpr -> STRING DIVIDE filename','pathexpr',3,'p_pathexpr','pcs_lexer.py',294),
+  ('filename -> STRING PERIOD STRING','filename',3,'p_pathexpr','pcs_lexer.py',295),
+  ('filename -> STRING','filename',1,'p_pathexpr','pcs_lexer.py',296),
+  ('receiptexpr -> RECEIPT CLEAR HEAD','receiptexpr',3,'p_receiptexpr_creat','pcs_lexer.py',303),
+  ('receiptexpr -> RECEIPT CLEAR BODY','receiptexpr',3,'p_receiptexpr_creat','pcs_lexer.py',304),
+  ('receiptexpr -> RECEIPT CLEAR FOOTER','receiptexpr',3,'p_receiptexpr_creat','pcs_lexer.py',305),
+  ('receiptexpr -> RECEIPT APPEND STRING TO HEAD','receiptexpr',5,'p_receiptexpr_append','pcs_lexer.py',312),
+  ('receiptexpr -> RECEIPT APPEND STRING TO BODY','receiptexpr',5,'p_receiptexpr_append','pcs_lexer.py',313),
+  ('receiptexpr -> RECEIPT APPEND STRING TO FOOTER','receiptexpr',5,'p_receiptexpr_append','pcs_lexer.py',314),
+  ('mainviewexpr -> VIEW STRING','mainviewexpr',2,'p_mainviewexp','pcs_lexer.py',325),
+  ('mainviewexpr -> VIEW ADD_ITEM item_details','mainviewexpr',3,'p_mainviewexp','pcs_lexer.py',326),
+  ('mainviewexpr -> VIEW SET_SHOP_NAME STRING','mainviewexpr',3,'p_mainviewexp','pcs_lexer.py',327),
+  ('mainviewexpr -> VIEW SET_DIMENSION NUMBER COMMA NUMBER','mainviewexpr',5,'p_mainviewexp','pcs_lexer.py',328),
+  ('mainviewexpr -> VIEW SET_CART_ROW_SIZE NUMBER','mainviewexpr',3,'p_mainviewexp','pcs_lexer.py',329),
+  ('mainviewexpr -> VIEW SET_CART_QUANTITY_ENABLE boolean','mainviewexpr',3,'p_mainviewexp','pcs_lexer.py',330),
+  ('item_details -> STRING COMMA STRING COMMA STRING COMMA FLOAT','item_details',7,'p_item_details','pcs_lexer.py',354),
+  ('mainviewexpr -> VIEW TABLE_C STRING','mainviewexpr',3,'p_table_to_view','pcs_lexer.py',361),
+  ('tableExp -> TABLE_C STRING column','tableExp',3,'p_createTable','pcs_lexer.py',382),
+  ('tableExp -> TABLE_R STRING column','tableExp',3,'p_addRowToTable','pcs_lexer.py',392),
+  ('tableExp -> TABLE_C STRING','tableExp',2,'p_showTable','pcs_lexer.py',401),
+  ('column -> id','column',1,'p_column','pcs_lexer.py',410),
+  ('column -> id COMMA column','column',3,'p_column','pcs_lexer.py',411),
+  ('reportexpr -> item_type_enable boolean','reportexpr',2,'p_report_create_view','pcs_lexer.py',431),
+  ('reportexpr -> item_enable boolean','reportexpr',2,'p_report_create_view','pcs_lexer.py',432),
+  ('empty -> <empty>','empty',0,'p_empty','pcs_lexer.py',449),
 ]

@@ -1,6 +1,8 @@
 import ply.lex as lex
 import ply.yacc as yacc
 from main_view import Ui_MainWindow
+import functions as FT
+# from receipt_view import Ui_Form as receipt
 
 import tableManager as tm
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -10,7 +12,10 @@ from store_item import store_item
 
 # Main View
 ui = Ui_MainWindow()
-ui.guiMain()
+ft = ui.guiMain()
+ui.initialize_receipt()
+ui.receipt()
+# ui.setReceipt(receipt)
 
 # Receipt View
 
@@ -298,26 +303,16 @@ def p_expression_int_float(p):
 
 
 # Receipt Parsing
-def p_receiptexpr_clear(p):
+def p_receiptexpr_creat(p):
     '''
-    receiptexpr : RECEIPT SPACE CLEAR SPACE HEAD
-            | RECEIPT SPACE CLEAR SPACE BODY
-            | RECEIPT SPACE CLEAR SPACE FOOTER
+    receiptexpr : RECEIPT CLEAR HEAD
+            | RECEIPT CLEAR BODY
+            | RECEIPT CLEAR FOOTER
     '''
-    # receipt clear header                              # TODO
-    # receipt clear body                                # TODO
-    # receipt clear footer                              # TODO
-    print((p[1], p[3], p[5]))
-    if p[5] == "header":
-        print(".. Clearing receipt", p[5])
-        # TODO: insert function here
-    if p[5] == "body":
-        print(".. Clearing receipt", p[5])
-        # TODO: insert function here
-    if p[5] == "footer":
-        print(".. Clearing receipt", p[5])
-        # TODO: insert function here
-    p[0] = (p[1], p[3], p[5])
+    print((p[1], p[2], p[3]))
+    if p[3] == "HEAD":
+        ui.clearHeader()
+    p[0] = (p[1],p[2],p[3])
 
 def p_sentence(p):
     '''
@@ -361,7 +356,6 @@ def makeParagraph(input_tuple):
         print(" * Not defined * ")
     return tempStr
 
-# fix test
 def p_receiptexpr_append(p):
     '''
     receiptexpr : RECEIPT SPACE APPEND SPACE paragraph SPACE TO SPACE HEAD
