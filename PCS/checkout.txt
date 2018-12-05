@@ -1,3 +1,0 @@
-jamonilla 2.15
-rice 5.14
-coke 1.0

@@ -1,6 +1,8 @@
 import ply.lex as lex
 import ply.yacc as yacc
 from main_view import Ui_MainWindow
+import functions as FT
+# from receipt_view import Ui_Form as receipt
 
 import tableManager as tm
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -10,7 +12,10 @@ from store_item import store_item
 
 # Main View
 ui = Ui_MainWindow()
-ui.guiMain()
+ft = ui.guiMain()
+ui.initialize_receipt()
+ui.receipt()
+# ui.setReceipt(receipt)
 
 # Receipt View
 
@@ -317,6 +322,8 @@ def p_receiptexpr_creat(p):
             | RECEIPT CLEAR FOOTER
     '''
     print((p[1], p[2], p[3]))
+    if p[3] == "HEAD":
+        ui.clearHeader()
     p[0] = (p[1],p[2],p[3])
 
 def p_receiptexpr_append(p):
@@ -339,8 +346,11 @@ def p_mainviewexp(p) :
                 | VIEW SET_CART_QUANTITY_ENABLE boolean
     '''
     # view add_item papa, papa1, foo, 1.23
+    global receipt
     if len(p) < 4:
         if p[2] == "shop":
+            ui.appendToHeader("yeah bitch!")
+            print("done view shop")
             ui.show_main_window()
             p[0] = p[2]
         else:

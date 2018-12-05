@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>291</width>
-    <height>0</height>
+    <width>287</width>
+    <height>459</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -48,7 +48,8 @@
     <enum>Qt::ScrollBarAsNeeded</enum>
    </property>
    <property name="plainText">
-    <string/>
+    <string>header crap
+</string>
    </property>
    <property name="centerOnScroll">
     <bool>false</bool>
@@ -79,6 +80,10 @@
      <height>71</height>
     </rect>
    </property>
+   <property name="plainText">
+    <string>footer crap
+</string>
+   </property>
   </widget>
   <widget class="QPlainTextEdit" name="body_text">
    <property name="enabled">
@@ -91,6 +96,10 @@
      <width>271</width>
      <height>231</height>
     </rect>
+   </property>
+   <property name="plainText">
+    <string>body crap
+</string>
    </property>
   </widget>
   <widget class="QLabel" name="body_label">

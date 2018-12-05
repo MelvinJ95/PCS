@@ -1,27 +1,28 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from report_view import Ui_report_view
-<<<<<<< HEAD
+
 # from main_view import Ui_MainWindow
-=======
->>>>>>> e6e3c552e4f1f2f5bbdb67b94c49c533d76c28e6
+
 from create_report_view import Ui_reportCreateView as RCV
-from receipt_view import Ui_Form as RV
+import sys
 # from store_item import store_item
 
 
 total_cost = 0
 class function(object):
     global Ui_MainWindow
-    global Ui_Form
+    global VReceipt
     global total_cost
+    global Form
+    global app
+
+    def initApp(self):
+        global app
+        app = QtWidgets.QApplication(sys.argv)
 
     def returnObj(self,object): # COPY OF MAIN VIEW INSTANCE
         global Ui_MainWindow # Declared again to edit value
         Ui_MainWindow = object
-
-    def return_receipt(self, object):
-        global Ui_Form
-        Ui_Form = object
 
     def addtoCart(self, object, item):
         global total_cost  #Declared again to edit value
@@ -55,10 +56,23 @@ class function(object):
         Ui_MainWindow.window.show()
 
     def receipt(self):
+        global VReceipt
+        global app
+        print("entered receipt")
         Ui_MainWindow.window = QtWidgets.QMainWindow()
-        Ui_MainWindow.ui = RV()
+        Ui_MainWindow.ui = VReceipt
+        Ui_MainWindow.ui.setupUi(Ui_MainWindow.window)
+        # Ui_MainWindow.window.show()
+        # app.exec_()
+    def mainReceipt(self):
+        global VReceipt
+        global app
+        print("entered receipt")
+        Ui_MainWindow.window = QtWidgets.QMainWindow()
+        Ui_MainWindow.ui = VReceipt
         Ui_MainWindow.ui.setupUi(Ui_MainWindow.window)
         Ui_MainWindow.window.show()
+
 
     def total(self):
         return total_cost
@@ -70,24 +84,6 @@ class function(object):
         Ui_MainWindow.setGridSize(QtCore.QSize(x,y))
 
     def setCartRowSize(self, x):
-        Ui_MainWindow.cart_table.verticalHeader().setDefaultSectionSize(x);
-
-    def clearHeader(self): #RECEIPT
-        Ui_Form.header_label.setText(QtCore.QCoreApplication.translate("Form", "<html><head/><body><p>"+" "+"</p></body></html>"))
-
-    def appendToHeader(self, x):
-        Ui_Form.header_label.setText(QtCore.QCoreApplication.translate("Form", "<html><head/><body><p align = \'center\'>"+x+"</p></body></html>")) #centered
-
-    def clearBody(self):
-        Ui_Form.header_label_3.setText(QtCore.QCoreApplication.translate("Form", "<html><head/><body><p>"+" "+"</p></body></html>"))
-
-    def appendToBody(self,x):
-        Ui_Form.header_label_3.setText(QtCore.QCoreApplication.translate("Form", "<html><head/><body><p align = \'center\'>" + x + "</p></body></html>")) #centered
-
-    def clearFooter(self):
-        Ui_Form.header_label_2.setText(QtCore.QCoreApplication.translate("Form", "<html><head/><body><p>"+" "+"</p></body></html>"))
-
-    def appendToFooter(self,x):
-        Ui_Form.header_label_2.setText(QtCore.QCoreApplication.translate("Form", "<html><head/><body><p align = \'center\'>" + x + "</p></body></html>")) #centered
+        Ui_MainWindow.cart_table.verticalHeader().setDefaultSectionSize(x);d
 
     # def addElement(self, element):
