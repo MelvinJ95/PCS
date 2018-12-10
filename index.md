@@ -19,7 +19,7 @@
 
 ### **Add elements to the shop** ###
 
-### **Edit receipt elements    ** ###
+### **Edit receipt elements** ###
 
 
 ## Video Demostration ## 
