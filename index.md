@@ -32,7 +32,9 @@ For further implementations, PCS wants to provide more customization and functio
 
 **Future Implementation** | **Description**
 ------------- | -------------
-**Real-time Modifications**  | The user will be able to add elements to store, reflect items from database, and customize layout in realtime. {: style="text-align: justify"}
-**Database Implementation**  | A database will be added to organize store inventory in a more organized manner, plus monitor sales.  {: style="text-align: justify"}
-**Sales Report Management** | A report view will be implemented that will allow the store owner to generate sale reports within a specific timeframe and be able to see what items were sold during said period, or filter to view sales per item type and see purchase behavior within the store. {: style="text-align: justify"}
-**More Customization Alternatives** | New pre-designed themes are planned to be added, alongside with the alternative to take themes and tweak colored elements and positioning of GUI elements, and allow for respective container resizing. {: style="text-align: justify"}
+**Real-time Modifications**  | The user will be able to add elements to store, reflect items from database, and customize layout in realtime. 
+**Database Implementation**  | A database will be added to organize store inventory in a more organized manner, plus monitor sales.  
+**Sales Report Management** | A report view will be implemented that will allow the store owner to generate sale reports within a specific timeframe and be able to see what items were sold during said period, or filter to view sales per item type and see purchase behavior within the store.
+**More Customization Alternatives** | New pre-designed themes are planned to be added, alongside with the alternative to take themes and tweak colored elements and positioning of GUI elements, and allow for respective container resizing.
+
+{: style="text-align: justify"}
