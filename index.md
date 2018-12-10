@@ -1,5 +1,5 @@
 # **PCS - Personal Cashier System** # 
-
+&nbsp;
 ## Brief Overlook ## 
 
 #### PCS (or Personal Cashier System) is a resulting programming language from the necessity to help independent merchants and mobile salesmen to set up their own store without having to rely upon third-party companies or freelance developers. Most mobile stores exist independent from a company that would normally grant them funds to sustain and build their store. These, on the other hand, depend solely on the respective store owner's budget. It is preferrable that they do not have to spend some of their limited resources to have to be able to set up their store. Despite having the alternative of utilizing pre-existing methods such as traditional cash registers, ATMs, and/or mobile money transferring, PCS pretends to facilitate and bring new flavor to their service by offering a more modern and convenient system, which can be used in unison with the previously method alternatives. #### 
@@ -20,6 +20,7 @@
 ### **Add elements to the shop** ###
 
 ### **Edit receipt elements** ###
+&nbsp;
 
 ## Video Demostration ## 
 
