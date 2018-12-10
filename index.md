@@ -1,4 +1,4 @@
-# **PCS - Personal Cashier System    ** # 
+# **PCS - Personal Cashier System** # 
 
 ## Brief Overlook ## 
 
