@@ -15,11 +15,11 @@
 
 #### Below will be a set of examples for basic functionalities that PCS provides to the user. #####
 
-### **Create the shop**
+### **Create the shop** ###
 
-### **Add elements to the shop**
+### **Add elements to the shop** ###
 
-### **Edit receipt elements**  
+### **Edit receipt elements** ###
 
 ## Video Demostration ## 
 
