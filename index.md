@@ -24,7 +24,7 @@
 
 ## Video Demonstration ## 
 
-<!DOCTYPE html> <html> <body> <iframe width="560" height="315" src="https://www.youtube.com/embed/9LT2g4jJGm8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> </iframe> </body> </html>
+<html> <body> <iframe width="560" height="315" src="https://www.youtube.com/embed/9LT2g4jJGm8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> </iframe> </body> </html>
 
 ## Future Work ## 
 
