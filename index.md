@@ -22,7 +22,7 @@
 ### **Edit receipt elements** ###
 
 
-## Video Demostration ## 
+## Video Demonstration ## 
 
 [![](http://img.youtube.com/vi/9LT2g4jJGm8/0.jpg)](http://www.youtube.com/watch?v=9LT2g4jJGm8 "PCS - Video Demonstration")
 
