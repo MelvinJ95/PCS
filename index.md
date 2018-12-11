@@ -16,29 +16,29 @@
 #### Below will be a set of examples for basic functionalities that PCS provides to the user. #####
 
 ### **Create the shop** ###
-'''
+```
       view shop
-'''
+```
 #### Command creates basic GUI layout and later on allows to visualize the current state of the store.  ####
 
 ### **Change store name** ###
-'''
+```
       view set_shop_name desired_name
-'''
+```
 
 #### Command allows user to change store or service named to the one specified as input.  ####
 
 ### **Add elements to the shop** ###
-'''
+```
       view add_item icon, name, type, price
-'''
+```
 
 #### Commands allows user to add a respective element to the store. Creates an icon and locks it into the store's inventory's container with the selected image and name.  ####
 
-### **Edit receipt elements** ###
-'''
+### **Edit receipt layout content** ###
+```
       receipt append desired_name to header/footer
-'''
+```
 
 #### Command allows user to alter the header or footer of the receipt to the desired content desired.  ####
 ## Video Demonstration ## 
